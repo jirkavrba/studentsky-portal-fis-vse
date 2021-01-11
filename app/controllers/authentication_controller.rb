@@ -16,6 +16,11 @@ class AuthenticationController < ApplicationController
                          alert: 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.'
     end
 
+    if Rails.env.production? && !verify_hcaptcha(model: @user)
+      return redirect_to sign_up_url,
+                         alert: "Nevyplněná ochrana proti robotům."
+    end
+
     session[:user_id] = user.id
 
     redirect_to root_url, notice: "Přihlášen jako #{user.display_name}"

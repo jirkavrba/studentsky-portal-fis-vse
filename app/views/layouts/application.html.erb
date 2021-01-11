@@ -17,7 +17,7 @@
 <div class="d-flex flex-column" style="min-height: 100vh">
   <div class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container mt-3">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="<%= root_url %>">
         <h1 class="h3">Studentský portál</h1>
         <p class="text-uppercase text-muted fw-bold fs-6">Komunitní server pro studenty FIS VŠE v Praze</p>
       </a>
@@ -27,15 +27,15 @@
     <div class="container">
       <ul class="nav">
         <li class="nav-item">
-          <%= link_to "Domovská stránka", root_url, class: "nav-link" %>
+          <%= link_to "Domovská stránka", root_url, class: "nav-link text-black-50" %>
         </li>
       </ul>
       <ul class="nav ms-auto">
         <li class="nav-item">
-          <%= link_to "Přihlášení", sign_in_url, class: "nav-link" %>
+          <%= link_to "Přihlášení", sign_in_url, class: "nav-link text-black-50" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Registrace", sign_up_url, class: "nav-link" %>
+          <%= link_to "Registrace", sign_up_url, class: "nav-link text-black-50" %>
         </li>
       </ul>
     </div>
@@ -44,7 +44,13 @@
   <% unless flash[:alert].nil? %>
     <div class="alert alert-danger">
       <div class="container">
-        <%= flash[:alert] %>
+        <% if flash[:alert].respond_to?(:each) %>
+          <% flash[:alert].each do |alert| %>
+            <%= alert %><br>
+          <% end %>
+        <% else %>
+          <%= flash[:alert] %>
+        <% end %>
       </div>
     </div>
   <% end %>

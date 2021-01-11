@@ -10,13 +10,13 @@
             <%= text_field_tag :username, "", class: "form-control",
                                               pattern: "^[a-z0-9]+$",
                                               placeholder: "Např. vrbj04",
+                                              autofocus: true,
                                               required: true %>
           </div>
 
           <div class="form-group mb-2">
             <%= label_tag :password, "Heslo" %>
             <%= password_field_tag :password, "", class: "form-control", required: true %>
-            <small><a href="" class="text-decoration-none">Zapomenuté heslo?</a></small>
           </div>
 
           <hr>
@@ -24,6 +24,14 @@
           <div class="d-grid gap-2">
             <%= submit_tag "Přihlásit se", class: "btn btn-lg btn-primary btn-fluid" %>
           </div>
+
+          <hr>
+
+          <small>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="text-decoration-none">
+              Zapomenuté heslo?
+            </a>
+          </small>
         <% end %>
       </div>
       <div class="card-footer">

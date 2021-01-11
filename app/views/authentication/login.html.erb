@@ -1,8 +1,41 @@
-<div class="w-2/3 shadow-xl bg-gray-50 rounded-xl mx-auto">
-    <div class="grid grid-cols-2">
-      <div class="p-10">
-      <h1 class="text-2xl uppercase font-bold text-gray-500">Přihlášení do aplikace</h1>
+<h1>Přihlášení do aplikace</h1>
+
+<div class="row mt-2">
+  <div class="col-sm-12 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with url: sign_in_url, method: :post do |form| %>
+          <div class="form-group mb-2">
+            <%= label_tag :username, "Školní xname" %>
+            <%= text_field_tag :username, "", class: "form-control", required: true %>
+            <small class="text-muted">Např. vrbj04</small>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= label_tag :password, "Heslo" %>
+            <%= password_field_tag :password, "", class: "form-control", required: true %>
+          </div>
+
+          <hr>
+
+          <div class="d-grid gap-2">
+            <%= submit_tag "Přihlásit se", class: "btn btn-lg btn-primary btn-fluid" %>
+          </div>
+        <% end %>
       </div>
-      <div class="bg-blue-300 rounded-r-xl py-10"></div>
+      <div class="card-footer">
+          <code class="text-black-50 fw-bold">IP: <%= request.remote_ip %></code>
+      </div>
     </div>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <div class="alert alert-info">
+      <b>Před prvním přihlášením je potřeba účet aktivovat!</b>
+      <p>
+        Po registraci bude na email <code>username@vse.cz</code> odeslán odkaz pro aktivaci účtu. <br>
+        Po kliknutí na něj se zpřístupní přihlášení do portálu.
+      </p>
+    </div>
+  </div>
 </div>

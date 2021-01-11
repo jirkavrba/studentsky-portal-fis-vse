@@ -1,45 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Studentský portál FIS VŠE</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Studentský portál FIS VŠE</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-  </head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</head>
 
-  <body>
-    <div class="bg-white py-10 px-20 ">
-        <h1 class="text-5xl font-bold text-black">Studentský portál</h1>
-        <p class="font-bold text-gray-400 mt-3 uppercase">Komunitní server pro studenty FIS VŠE v Praze</p>
+<body>
+<div class="d-flex flex-column" style="min-height: 100vh">
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container mt-3">
+      <a class="navbar-brand" href="#">
+        <h1 class="h3">Studentský portál</h1>
+        <p class="text-uppercase text-muted fw-bold fs-6">Komunitní server pro studenty FIS VŠE v Praze</p>
+      </a>
     </div>
-    <div class="navbar">
-      <ul class="flex justify-between align-center">
-        <li>
-          <%= link_to "Domovská stránka", root_url, class: "navbar__item navbar__item--important" %>
+  </div>
+  <div class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <ul class="nav">
+        <li class="nav-item">
+          <%= link_to "Domovská stránka", root_url, class: "nav-link" %>
         </li>
       </ul>
-      <ul class="flex justify-between align-center">
-        <li>
-          <%= link_to "Přihlášení", sign_in_url, class: "navbar__item" %>
+      <ul class="nav ms-auto">
+        <li class="nav-item">
+          <%= link_to "Přihlášení", sign_in_url, class: "nav-link" %>
         </li>
-        <li>
-          <%= link_to "Registrace", sign_up_url, class: "navbar__item" %>
+        <li class="nav-item">
+          <%= link_to "Registrace", sign_up_url, class: "nav-link" %>
         </li>
       </ul>
     </div>
+  </div>
 
-    <div class="m-10">
-      <%= yield %>
+  <div class="container my-3 flex-grow-1">
+    <%= yield %>
+  </div>
+
+  <footer class="bg-dark py-3">
+    <div class="container text-light">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <b>&copy; Jiří Vrba 2021</b><br>
+          <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank">Zdrojové kódy</a>
+        </div>
+      </div>
     </div>
-
-    <footer>
-      <p>Aplikace je <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank">open source</a></p>
-    </footer>
-  </body>
+  </footer>
+</div>
+</body>
 </html>

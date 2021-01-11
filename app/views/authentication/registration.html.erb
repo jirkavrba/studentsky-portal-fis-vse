@@ -1,0 +1,50 @@
+<h1>Registrace nového uživatele</h1>
+
+<div class="row mt-2">
+  <div class="col-sm-12 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with model: @user, url: sign_up_url, method: :post do %>
+          <div class="form-group mb-2">
+            <%= label :user, :username, "Školní xname" %><br>
+            <%= text_field :user, :username, class: "form-control", pattern: "^[a-z0-9]+$", required: true %>
+            <small class="text-muted">Např. vrbj04</small>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= label :user, :name, "Jméno a příjmení" %><br>
+            <%= text_field :user, :name, class: "form-control", placeholder: "Nepovinné" %>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= label :user, :password, "Heslo" %>
+            <%= password_field :user, :password, class: "form-control", minlength: 8, required: true %>
+            <small class="text-muted">Minimálně 8 znaků</small>
+          </div>
+
+          <hr>
+
+          <div class="d-grid gap-2">
+            <%= submit_tag "Registrovat se", class: "btn btn-lg btn-primary btn-fluid" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <code class="text-black-50 fw-bold">IP: <%= request.remote_ip %></code>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <div class="alert alert-danger">
+      <b>Po registraci je potřeba účet aktivovat!</b>
+      <hr>
+      <p>
+        Po registraci bude na email <code>username@vse.cz</code> odeslán odkaz pro aktivaci účtu. <br>
+        Po kliknutí na něj se zpřístupní přihlášení do portálu.
+      </p>
+    </div>
+
+    <%= link_to "Přihlášení jako registrovaný uživatel", sign_in_url, class: "btn btn-dark"  %>
+  </div>
+</div>

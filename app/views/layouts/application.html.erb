@@ -41,6 +41,22 @@
     </div>
   </div>
 
+  <% unless flash[:alert].nil? %>
+    <div class="alert alert-danger">
+      <div class="container">
+        <%= flash[:alert] %>
+      </div>
+    </div>
+  <% end %>
+
+  <% unless flash[:notice].nil? %>
+    <div class="alert alert-info">
+      <div class="container">
+        <%= flash[:notice] %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="container my-3 flex-grow-1">
     <%= yield %>
   </div>

@@ -1,17 +1,33 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  username: MyString
-  name: MyString
-  password_digest: MyString
+verified_user:
+  username: verified_user
+  name: Verified user
+  password_digest: somebody_once_told_me
+  is_admin: false
+  is_banned: false
+  is_verified: true
+
+non_verified_user:
+  username: non_verified_user
+  name: Verified user, but not really
+  password_digest: the_world_is_gonna_roll_me
   is_admin: false
   is_banned: false
   is_verified: false
 
-two:
-  username: MyString
-  name: MyString
-  password_digest: MyString
-  is_admin: false
+admin_user:
+  username: admin
+  name: Admin user
+  password_digest: I_aint_the_sharpest_tool_in_the_shed
+  is_admin: true
   is_banned: false
-  is_verified: false
+  is_verified: true
+
+banned_user:
+  username: badb0i
+  name: Bad guy
+  password_digest: Im_the_baaaaad_guy__da
+  is_admin: false
+  is_banned: true
+  is_verified: true

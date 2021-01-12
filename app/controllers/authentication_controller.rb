@@ -44,6 +44,11 @@ class AuthenticationController < ApplicationController
     end
   end
 
+  def logout
+    session[:user_id] = nil
+    redirect_to root_url, notice: 'Odhlášení proběhlo úspěšně.'
+  end
+
   def verify_email
     code = params[:code]
     verification = EmailVerification.find_by verification_code: code

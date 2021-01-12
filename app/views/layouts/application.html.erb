@@ -31,12 +31,23 @@
         </li>
       </ul>
       <ul class="nav ms-auto">
-        <li class="nav-item">
-          <%= link_to "Přihlášení", sign_in_url, class: "nav-link text-black-50" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Registrace", sign_up_url, class: "nav-link text-black-50" %>
-        </li>
+        <% if signed_in? %>
+          <li class="nav-item">
+            <a href="#TODO_add-profile-link-here" class="nav-link text-dark">
+              <%= current_user.display_name %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Odhlásit se", logout_url, class: "nav-link text-black-50" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Přihlášení", sign_in_url, class: "nav-link text-black-50" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Registrace", sign_up_url, class: "nav-link text-black-50" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

@@ -10,7 +10,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  def logout
+  def sign_out
     get logout_url
   end
 
@@ -19,7 +19,7 @@ class ActiveSupport::TestCase
 
     post sign_in_url, params: {
       username: user.username,
-      password: user.password
+      password: name
     }
   end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AuthenticationController < ApplicationController
+  before_action :redirect_if_authenticated!, except: [:logout]
+
   def login; end
 
   def registration
@@ -11,7 +13,7 @@ class AuthenticationController < ApplicationController
     login_params = params.permit(:username, :password)
     user = User.find_by username: login_params[:username]
 
-    if user.nil? || !user.authenticate(login_params[:password])
+    unless user&.authenticate(login_params[:password])
       return redirect_to sign_in_url, alert: 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.'
     end
 

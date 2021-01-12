@@ -31,7 +31,7 @@
         </li>
       </ul>
       <ul class="nav ms-auto">
-        <% if signed_in? %>
+        <% if authenticated? %>
           <li class="nav-item">
             <a href="#TODO_add-profile-link-here" class="nav-link text-dark">
               <%= current_user.display_name %>

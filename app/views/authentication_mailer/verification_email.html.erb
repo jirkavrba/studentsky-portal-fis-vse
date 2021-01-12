@@ -1,0 +1,9 @@
+<h1>Aktivace účtu na studentském portálu.</h1>
+
+<p>
+  Pro váš účet <b><%= @user.display_name %></b> byl vygenerován následující aktivační odkaz: <br>
+  <br>
+  <a href="<%= verification_url(@user.email_verification.verification_code) %>">
+  <code><%= verification_url(@user.email_verification.verification_code) %></code>
+  </a>
+</p>

@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   post '/sign_in', to: 'authentication#process_login'
   post '/sign_up', to: 'authentication#process_registration'
+
+  get '/verification/:code', to: 'authentication#verify_email', as: 'verification'
 end

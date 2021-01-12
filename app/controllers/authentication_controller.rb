@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AuthenticationController < ApplicationController
+  before_action :redirect_if_authenticated!, except: [:logout]
+
   def login; end
 
   def registration
@@ -11,12 +13,16 @@ class AuthenticationController < ApplicationController
     login_params = params.permit(:username, :password)
     user = User.find_by username: login_params[:username]
 
-    if user.nil? || !user.authenticate(login_params[:password])
+    unless user.present? && user.authenticate(login_params[:password])
       return redirect_to sign_in_url, alert: 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.'
     end
 
     unless user.is_verified
       return redirect_to sign_in_url, alert: 'Tento účet ještě nebyl aktivován pomocí odkazu v emailu.'
+    end
+
+    if user.is_banned
+      return redirect_to sign_in_url, alert: 'Tento účet byl zablokován administrátory a není možné se přihlásit.'
     end
 
     session[:user_id] = user.id
@@ -86,6 +92,7 @@ class AuthenticationController < ApplicationController
 
     AuthenticationMailer.with(user: user).verification_email.deliver_later
 
-    redirect_to sign_in_url, notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
+    redirect_to sign_in_url,
+                notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
   end
 end

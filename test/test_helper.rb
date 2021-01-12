@@ -10,4 +10,16 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def sign_out
+    get logout_url
+  end
+
+  def sign_in_as(name)
+    user = users(name)
+
+    post sign_in_url, params: {
+      username: user.username,
+      password: name
+    }
+  end
 end

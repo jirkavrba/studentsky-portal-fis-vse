@@ -3,7 +3,8 @@
 verified_user:
   username: verified_user
   name: Verified user
-  password_digest: somebody_once_told_me
+  password: somebody_once_told_me
+  password_digest: <%= BCrypt::Password.create('somebody_once_told_me') %>
   is_admin: false
   is_banned: false
   is_verified: true
@@ -11,7 +12,8 @@ verified_user:
 non_verified_user:
   username: non_verified_user
   name: Verified user, but not really
-  password_digest: the_world_is_gonna_roll_me
+  password: the_world_is_gonna_roll_me
+  password_digest: <%= BCrypt::Password.create('the_world_is_gonna_roll_me') %>
   is_admin: false
   is_banned: false
   is_verified: false
@@ -19,7 +21,8 @@ non_verified_user:
 admin_user:
   username: admin
   name: Admin user
-  password_digest: I_aint_the_sharpest_tool_in_the_shed
+  password: I_aint_the_sharpest_tool_in_the_shed
+  password_digest: <%= BCrypt::Password.create('I_aint_the_sharpest_tool_in_the_shed') %>
   is_admin: true
   is_banned: false
   is_verified: true
@@ -27,7 +30,8 @@ admin_user:
 banned_user:
   username: badb0i
   name: Bad guy
-  password_digest: Im_the_baaaaad_guy__da
+  password: Im_the_baaaaad_guy__da
+  password_digest: <%= BCrypt::Password.create('Im_the_baaaaad_guy__da') %>
   is_admin: false
   is_banned: true
   is_verified: true

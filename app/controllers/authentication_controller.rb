@@ -12,13 +12,15 @@ class AuthenticationController < ApplicationController
     user = User.find_by username: login_params[:username]
 
     if user.nil? || !user.authenticate(login_params[:password])
-      return redirect_to sign_in_url,
-                         alert: 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.'
+      return redirect_to sign_in_url, alert: 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.'
+    end
+
+    unless user.is_verified
+      return redirect_to sign_in_url, alert: 'Tento účet ještě nebyl aktivován pomocí odkazu v emailu.'
     end
 
     if Rails.env.production? && !verify_hcaptcha(model: @user)
-      return redirect_to sign_up_url,
-                         alert: "Nevyplněná ochrana proti robotům."
+      return redirect_to sign_up_url, alert: "Nevyplněná ochrana proti robotům."
     end
 
     session[:user_id] = user.id

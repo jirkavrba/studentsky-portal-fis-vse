@@ -31,10 +31,10 @@ class AuthenticationController < ApplicationController
     user = User.new registration_params
 
     if user.valid?
-      user.user_verification = UserVerification.new user_id: user.id, verification_code: SecureRandom.hex(32)
+      user.email_verification = EmailVerification.new verification_code: SecureRandom.hex(32)
       user.save!
 
-      # TODO: Send verification email to user.username@vse.cz
+      AuthenticationMailer.with(user: user).verification_email.deliver_later
 
       redirect_to sign_in_url, notice: "Na email #{user.username}@vse.cz byl odeslán aktivační odkaz."
     else

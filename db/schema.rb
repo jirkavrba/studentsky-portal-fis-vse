@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_203646) do
+ActiveRecord::Schema.define(version: 2021_01_12_094934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "user_verifications", force: :cascade do |t|
+  create_table "email_verifications", force: :cascade do |t|
     t.integer "user_id"
     t.string "verification_code"
     t.datetime "created_at", precision: 6, null: false

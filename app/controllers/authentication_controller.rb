@@ -43,4 +43,18 @@ class AuthenticationController < ApplicationController
       redirect_to sign_up_url, alert: user.errors.full_messages
     end
   end
+
+  def verify_email
+    code = params[:code]
+    verification = EmailVerification.find_by verification_code: code
+
+    if verification.nil?
+      return redirect_to sign_in_url, alert: 'Neplatný aktivační odkaz.'
+    end
+
+    verification.user.update! is_verified: true
+    verification.delete
+
+    redirect_to sign_in_url, notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
+  end
 end

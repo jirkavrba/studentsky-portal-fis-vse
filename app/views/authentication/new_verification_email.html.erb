@@ -1,0 +1,41 @@
+<h1>Žádost o nový aktivační odkaz</h1>
+
+<div class="row mt-2">
+  <div class="col-sm-12 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with url: new_verification_url, method: :post do %>
+          <div class="form-group mb-2">
+            <%= label_tag :username, "Školní xname" %><br>
+            <%= text_field_tag :username, "", class: "form-control",
+                               pattern: "^[a-z0-9]+$",
+                               placeholder: "Např. vrbj04",
+                               autofocus: true,
+                               required: true %>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= label_tag :password, "Heslo" %>
+            <%= password_field_tag :password, "", class: "form-control", required: true %>
+          </div>
+
+          <% if Rails.env.production? %>
+            <hr>
+
+            <%= label :user, :hcaptcha, "Ochrana proti robotům" %>
+            <%= hcaptcha_tags class: "mt-2", theme: :light %>
+          <% end %>
+
+          <hr>
+
+          <div class="d-grid gap-2">
+            <%= submit_tag "Poslat nový aktivační kód", class: "btn btn-lg btn-primary btn-fluid" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <code class="text-black-50 fw-bold">IP: <%= request.remote_ip %></code>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  verification_code: MyString
+  valid_due: 2021-01-11 21:36:46
+
+two:
+  user_id: 
+  verification_code: MyString
+  valid_due: 2021-01-11 21:36:46

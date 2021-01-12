@@ -31,8 +31,11 @@ class AuthenticationController < ApplicationController
     user = User.new registration_params
 
     if user.valid?
+      user.user_verification = UserVerification.new user_id: user.id, verification_code: SecureRandom.hex(32)
       user.save!
+
       # TODO: Send verification email to user.username@vse.cz
+
       redirect_to sign_in_url, notice: "Na email #{user.username}@vse.cz byl odeslán aktivační odkaz."
     else
       redirect_to sign_up_url, alert: user.errors.full_messages

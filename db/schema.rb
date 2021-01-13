@@ -18,8 +18,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_082025) do
   create_table "discord_verifications", force: :cascade do |t|
     t.integer "user_id"
     t.integer "discord_id"
-    t.string "challenge_code"
-    t.string "verification_code"
+    t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

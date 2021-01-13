@@ -1,3 +1,41 @@
 // Place all the styles related to the discord_verifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.discord-channel {
+  background: #36393f;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.discord-message {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  background: #36393f;
+  padding: 15px;
+  color: #dcddde;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+.discord-message__avatar {
+  width: 50px;
+  height: 50px;
+  background: #555555;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.discord-message__username {
+  padding: 5px;
+  font-weight: bold;
+  color: #555555;
+}
+
+.discord-message__text {
+  color: #ffffff;
+  font-size: 2rem;
+}

@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   get '/discord/verification', to: 'discord_verifications#show_code', as: 'discord_verification'
 
   scope '/api' do
-    get '/discord/complete_verification/:code/:discord_id', to: 'discord_verifications#complete', as: 'complete_discord_verification'
+    post '/discord/complete_verification/:code/:discord_id',
+         to: 'discord_verifications#complete',
+         as: 'complete_discord_verification'
   end
 
   resources :users, only: [:index, :show, :destroy]

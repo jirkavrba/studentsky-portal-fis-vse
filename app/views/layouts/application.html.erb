@@ -37,6 +37,17 @@
       </ul>
       <ul class="nav ms-auto">
         <% if authenticated? %>
+          <% if current_user.is_admin %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-black-50" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Administrace
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                <%= link_to "Správa uživatelů", users_url, class: "dropdown-item text-dark" %>
+                <%= link_to "Správa API tokenů", api_tokens_url, class: "dropdown-item text-dark" %>
+              </ul>
+            </li>
+          <% end %>
           <li class="nav-item">
             <a href="#TODO_add-profile-link-here" class="nav-link <%= current_user.is_admin ? 'text-danger' : 'text-dark' %>">
               <%= current_user.display_name %>

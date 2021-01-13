@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     redirect_to sign_in_url unless authenticated?
   end
 
+  def require_admin_privileges!
+    redirect_to root_url unless authenticated? && current_user.is_admin
+  end
+
   def redirect_if_authenticated!
     redirect_to root_url if authenticated?
   end

@@ -2,6 +2,7 @@
 
 class DiscordVerificationsController < ApplicationController
   before_action :authenticate!, except: [:complete]
+  before_action :require_valid_api_token!, except: [:show_code]
 
   def show_code
     @verification = current_user.discord_verification || DiscordVerification.new(user_id: current_user.id,

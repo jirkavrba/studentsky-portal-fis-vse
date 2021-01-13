@@ -9,6 +9,16 @@ class ApiTokensController < ApplicationController
   end
 
   def new
-    @token = ApiToken.new
+    @token = ApiToken.new value: SecureRandom.base64(64)
+    @token.save!
+
+    redirect_to api_tokens_url
+  end
+
+  def destroy
+    @token = ApiToken.find params[:id]
+    @token.delete
+
+    redirect_to api_tokens_url
   end
 end

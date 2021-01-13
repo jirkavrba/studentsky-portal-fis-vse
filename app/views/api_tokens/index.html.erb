@@ -4,7 +4,6 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Jméno</th>
             <th>Klíč</th>
             <th>Akce</th>
         </tr>
@@ -13,7 +12,20 @@
         <% @tokens.each do |token| %>
           <tr>
             <td><%= token.id %></td>
-            <td><%= token.value %></td>
+            <td>
+              <code class="fs-6">
+                <%= token.value %>
+              </code>
+            </td>
+            <td>
+              <%= link_to "Smazat token", api_token_url(token),
+                          method: :delete,
+                          class: "btn btn-sm btn-danger",
+                          data: {
+                            confirm: "Opravdu smazat tento token?"
+                          }
+              %>
+            </td>
           </tr>
         <% end %>
     </tbody>

@@ -10,6 +10,16 @@ class ApplicationController < ActionController::Base
     redirect_to root_url unless authenticated? && current_user.is_admin
   end
 
+  def require_valid_api_token!
+    if params[:api_token].nil?
+      return render json: { message: :missing_api_token }, status: :unauthorized
+    end
+
+    if ApiToken.find_by(value: params[:api_token]).nil?
+      render json: { message: :invalid_api_token }, status: :unauthorized
+    end
+  end
+
   def redirect_if_authenticated!
     redirect_to root_url if authenticated?
   end

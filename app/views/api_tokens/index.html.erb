@@ -1,0 +1,22 @@
+<h1>API tokeny</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Klíč</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @tokens.each do |token| %>
+          <tr>
+            <td><%= token.id %></td>
+            <td><%= token.value %></td>
+          </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to "Vygenerovat nový API token", new_api_token_url, class: "btn btn-primary" %>

@@ -15,8 +15,6 @@ Rails.application.routes.draw do
 
   get '/verification/:code', to: 'authentication#verify_email', as: 'verification'
 
-  resources :users, only: [:index, :show, :destroy]
-
   get '/users/ban/:id', to: 'users#ban', as: 'ban'
   get '/users/unban/:id', to: 'users#unban', as: 'unban'
 
@@ -25,4 +23,7 @@ Rails.application.routes.draw do
   scope '/api' do
     get '/discord/complete_verification/:code/:discord_id', to: 'discord_verifications#complete', as: 'complete_discord_verification'
   end
+
+  resources :users, only: [:index, :show, :destroy]
+  resources :api_tokens, only: [:index, :new, :destroy]
 end

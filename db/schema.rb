@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 2021_01_13_204928) do
   enable_extension "plpgsql"
 
   create_table "api_tokens", force: :cascade do |t|
-    t.string "name"
     t.string "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

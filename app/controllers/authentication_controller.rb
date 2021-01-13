@@ -74,7 +74,7 @@ class AuthenticationController < ApplicationController
     verification_params = params.permit(:username, :password)
 
     if Rails.env.production? && !verify_hcaptcha(model: @user)
-      return redirect_to sign_up_url, alert: 'Nevyplněná ochrana proti robotům.'
+      return redirect_to new_verification_url, alert: 'Nevyplněná ochrana proti robotům.'
     end
 
     user = User.find_by username: verification_params[:username]

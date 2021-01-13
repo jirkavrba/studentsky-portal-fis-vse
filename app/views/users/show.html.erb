@@ -23,7 +23,7 @@
         <hr>
 
         <% if @user.is_banned %>
-          <%= link_to "Odblokovat účet", ban_url(@user), class: "btn btn-primary", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?"} %>
+          <%= link_to "Odblokovat účet", unban_url(@user), class: "btn btn-primary", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?"} %>
         <% else %>
           <%= link_to "Blokovat účet", ban_url(@user), class: "btn btn-primary", data: { confirm: "Opravdu zabanovat uživatele #{@user.display_name}?"} %>
         <% end %>

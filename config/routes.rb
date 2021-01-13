@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   post '/verification/new', to: 'authentication#process_new_verification_email'
 
   get '/verification/:code', to: 'authentication#verify_email', as: 'verification'
+
+  resources :users
 end

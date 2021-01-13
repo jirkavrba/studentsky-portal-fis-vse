@@ -22,15 +22,18 @@ class ApplicationController < ActionController::Base
 
   # Http helpers
   def forbidden
-    render text: '403: HTTP_FORBIDDEN', status: :forbidden
+    @message = '403: HTTP_FORBIDDEN'
+    render 'error/base', status: :forbidden
   end
 
   def not_found
-    render text: '404: HTTP_NOT_FOUND', status: :not_found
+    @message = '404: HTTP_NOT_FOUND'
+    render 'error/base', status: :not_found
   end
 
   def internal_server_error
-    render text: '500: INTERNAL_SERVER_ERROR', status: :internal_server_error
+    @message = '500: HTTP_INTERNAL_SERVER_ERROR'
+    render 'error/base', status: :internal_server_error
   end
 
   rescue_from CanCan::AccessDenied, with: :forbidden

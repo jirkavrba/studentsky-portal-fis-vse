@@ -1,9 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
-  discord_id: 
+verified_user:
+  code: 44ac83e85d005311e026cbf38f811af9
+  user: verified_user
+  discord_id:
 
-two:
-  user_id: 1
-  discord_id: 
+non_verified_user:
+  code: 5ec042211ac0a3b220c7afe2e054c434
+  user: non_verified_user
+  discord_id:
+
+banned_user:
+  code: 3f65bdf8c522437e0a48473da89955b1
+  user: banned_user
+  discord_id:
+
+already_verified:
+  code: 3f65bdf8c522437e0a48473da89955b1
+  user: admin_user
+  discord_id: 238728915647070209
+

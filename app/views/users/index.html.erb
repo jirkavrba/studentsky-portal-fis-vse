@@ -1,0 +1,33 @@
+<h1>Správa uživatelů</h1>
+<p>Celkem registrováno <%= @users.count %> uživatelů</p>
+
+<hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Školní xname</th>
+      <th>Jméno</th>
+      <th>Aktivní účet?</th>
+      <th>Admin?</th>
+      <th>Ban?</th>
+      <th>Akce</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr <% if user.is_admin %> class="bg-danger text-white" <% end %>>
+      <td><%= user.id %></td>
+      <td><b><%= user.username %></b></td>
+      <td><%= user.name.presence || "-" %></td>
+      <td><%= user.is_verified ? "ANO" : "NE" %></td>
+      <td><%= user.is_admin ? "ANO" : "NE" %></td>
+      <td><%= user.is_banned ? "ANO" : "NE" %></td>
+      <td>
+        <%= link_to 'Zobrazit', user_url(user), class: 'btn btn-sm btn-primary' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

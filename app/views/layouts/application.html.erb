@@ -33,7 +33,7 @@
       <ul class="nav ms-auto">
         <% if authenticated? %>
           <li class="nav-item">
-            <a href="#TODO_add-profile-link-here" class="nav-link text-dark">
+            <a href="#TODO_add-profile-link-here" class="nav-link <%= current_user.is_admin ? 'text-danger' : 'text-dark' %>">
               <%= current_user.display_name %>
             </a>
           </li>

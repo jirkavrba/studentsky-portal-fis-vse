@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   get '/users/ban/:id', to: 'users#ban', as: 'ban'
   get '/users/unban/:id', to: 'users#unban', as: 'unban'
 
-  get '/discord/verification_code', to: 'discord_verifications#show_code'
+  get '/discord/verification', to: 'discord_verifications#show_code'
 
-  scope '/api/' do
+  scope '/api' do
     get '/discord/info/:discord_id', to: 'discord_verifications#info'
-    get '/discord/complete_verification/:code', to: 'discord_verifications#check_verification'
+    get '/discord/complete_verification/:code/:discord_id', to: 'discord_verifications#complete'
   end
 end

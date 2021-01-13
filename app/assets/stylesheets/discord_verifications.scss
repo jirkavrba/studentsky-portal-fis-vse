@@ -39,3 +39,23 @@
   color: #ffffff;
   font-size: 2rem;
 }
+
+.discord-role {
+  background: #36393f;
+  color: #dcddde;
+  padding: 5px 10px 5px 30px;
+  border-radius: 20px;
+  position: relative;
+  border: 2px solid #dcddde;
+}
+
+.discord-role::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 8px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #dcddde;
+}

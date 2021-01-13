@@ -15,5 +15,8 @@ Rails.application.routes.draw do
 
   get '/verification/:code', to: 'authentication#verify_email', as: 'verification'
 
-  resources :users
+  resources :users, only: [:index, :show, :destroy]
+  get '/users/ban/:id', to: 'users#ban', as: 'ban'
+  get '/users/unban/:id', to: 'users#unban', as: 'unban'
+
 end

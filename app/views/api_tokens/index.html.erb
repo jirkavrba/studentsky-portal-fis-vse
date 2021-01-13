@@ -1,0 +1,34 @@
+<h1>API tokeny</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Klíč</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @tokens.each do |token| %>
+          <tr>
+            <td><%= token.id %></td>
+            <td>
+              <code class="fs-6">
+                <%= token.value %>
+              </code>
+            </td>
+            <td>
+              <%= link_to "Smazat token", api_token_url(token),
+                          method: :delete,
+                          class: "btn btn-sm btn-danger",
+                          data: {
+                            confirm: "Opravdu smazat tento token?"
+                          }
+              %>
+            </td>
+          </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to "Vygenerovat nový API token", new_api_token_url, class: "btn btn-primary" %>

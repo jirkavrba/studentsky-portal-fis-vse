@@ -20,14 +20,25 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
   test 'banned users cannot verify their discord account' do
     verification = discord_verifications(:banned_user)
 
-    get complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209)
+    post complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209),
+         params: { api_token: api_tokens(:default).value }
+
     assert_response :unprocessable_entity
   end
 
   test 'users cannot verify multiple accounts' do
     verification = discord_verifications(:already_verified)
 
-    get complete_discord_verification_url(code: verification.code, discord_id: verification.discord_id)
+    post complete_discord_verification_url(code: verification.code, discord_id: verification.discord_id),
+         params: { api_token: api_tokens(:default).value }
+
     assert_response :unprocessable_entity
+  end
+
+  test 'users cannot verify account without API token' do
+    verification = discord_verifications(:verified_user)
+
+    post complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209)
+    assert_response :unauthorized
   end
 end

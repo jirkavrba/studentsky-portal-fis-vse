@@ -1,0 +1,2 @@
+class DiscordVerificationsController < ApplicationController
+end

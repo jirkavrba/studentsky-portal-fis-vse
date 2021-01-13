@@ -1,0 +1,25 @@
+<h1>Ověření účtu na fakultním Discord serveru.</h1>
+
+<% if @verification.discord_id.nil? %>
+  <div class="my-5">
+    <h5>Pokud ještě nejsi členem, můžeš se připojit na náš</h5>
+    <a href="https://discord.gg/yZMhTVQdkX" target="_blank" rel="nofollow" class="btn btn-lg btn-primary">Fakultní Discord</a>
+  </div>
+
+  <h4>Po přečtení pravidel se pak autorizuj následující zprávou v kanálu <span class="discord-channel">#verifikace</span></h4>
+
+  <div class="discord-message">
+    <div class="discord-message__avatar"></div>
+    <div class="discord-message__content">
+      <div class="discord-message__username"><%= current_user.display_name %></div>
+      <h5 class="discord-message__text">+verify <%= @verification.code %></h5>
+    </div>
+  </div>
+<% else %>
+  <div class="mt-5">
+    <h4 class="text-success">Účet byl verifikován!</h4>
+    <p>
+      Pokud se něco pokazilo a nebyla ti přidělena role <span class="discord-role">Authenticated</span>, zkus pingnout někoho z moderátorů serveru.
+    </p>
+  </div>
+<% end %>

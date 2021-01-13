@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'bot@studentsky-portal-fis-vse.herokuapp.com'
+  default from: 'bot@portal.fis-vse.cz'
   layout 'mailer'
 end

@@ -118,15 +118,15 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.host = 'studentsky-portal-fis-vse.herokuapp.com'
+  config.host = 'portal.fis-vse.cz'
   
-  config.action_mailer.default_url_options = { host: 'studentsky-portal-fis-vse.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'portal.fis-vse.cz' }
 
   ActionMailer::Base.smtp_settings = {
     user_name: ENV['SMTP_USERNAME'],
     password: ENV['SMTP_PASSWORD'],
-    domain: 'studentsky-portal-fis-vse.herokuapp.com',
     address: ENV['SMTP_HOST'],
+    domain: 'portal.fis-vse.cz',
     port: 587,
     authentication: :plain,
     enable_starttls_auto: true

@@ -12,25 +12,22 @@ class UsersController < ApplicationController
   end
 
   def ban
-    return redirect_to user_url(@user), notice: 'Nelze zabanovat administrátora.' if @user.is_admin
+    return redirect_to user_url(@user), alert: 'Nelze zabanovat administrátora.' if @user.is_admin
 
     @user.update is_banned: true
-
-    redirect_to user_url(@user)
+    redirect_to user_url(@user), notice: "Uživatel #{@user.display_name} byl zabanován."
   end
 
   def unban
     @user.update is_banned: false
-
-    redirect_to user_url(@user)
+    redirect_to user_url(@user), notice: "Uživatel #{@user.display_name} byl odbanován."
   end
 
   def destroy
-    return redirect_to user_url(@user), notice: 'Nelze smazat účet administrátora.' if @user.is_admin
+    return redirect_to user_url(@user), alert: 'Nelze smazat účet administrátora.' if @user.is_admin
 
     @user.delete
-
-    redirect_to users_url
+    redirect_to users_url, notice: "Uživatel #{@user.display_name} byl smazán."
   end
 
   private

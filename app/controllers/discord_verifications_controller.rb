@@ -22,15 +22,15 @@ class DiscordVerificationsController < ApplicationController
                     status: :not_found
     end
 
-    if verification.discord_id.present?
-      return render json: { status: :verification_code_already_used,
-                            message: 'This verification code was already used.' },
-                    status: :unprocessable_entity
-    end
-
     if verification.user.is_banned
       return render json: { status: :user_banned,
                             message: 'User with this verification code was banned and therefore cannot be verified.' },
+                    status: :unprocessable_entity
+    end
+
+    if verification.discord_id.present?
+      return render json: { status: :verification_code_already_used,
+                            message: 'This verification code was already used.' },
                     status: :unprocessable_entity
     end
 

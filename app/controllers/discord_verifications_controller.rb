@@ -45,7 +45,7 @@ class DiscordVerificationsController < ApplicationController
 
     render json: { status: :verified,
                    message: 'Account verified.',
-                   username: user.username }
+                   username: verification.user.username }
   end
 
   def check

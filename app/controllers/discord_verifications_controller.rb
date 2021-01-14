@@ -23,7 +23,7 @@ class DiscordVerificationsController < ApplicationController
     end
 
     if verification.discord_id.present?
-      return render json: { status: :verification_code_already_user,
+      return render json: { status: :verification_code_already_used,
                             message: 'This verification code was already used.' },
                     status: :unprocessable_entity
     end

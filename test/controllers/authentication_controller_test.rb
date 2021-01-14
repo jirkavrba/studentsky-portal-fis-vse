@@ -137,4 +137,23 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
     assert user.is_verified
     assert_nil user.email_verification
   end
+
+  test 'blacklisted users cannot sign up their account' do
+    sign_out
+
+    # Note that this is not personal, just a representative sample
+    blacklisted = %w(adaa04 adamek advorak aled02 alga01 alin00 andrlikh antj00 arltova arlt)
+
+    blacklisted.each do |username|
+      post sign_up_url, params: {
+        user: {
+          username: username,
+          name: '',
+          password: SecureRandom.hex(30)
+        }
+      }
+
+      assert_redirected_to sign_up_url
+    end
+  end
 end

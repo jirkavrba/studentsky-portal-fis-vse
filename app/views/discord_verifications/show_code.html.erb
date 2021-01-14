@@ -22,4 +22,17 @@
       Pokud se něco pokazilo a nebyla ti přidělena role <span class="discord-role">Authenticated</span>, zkus pingnout někoho z moderátorů serveru.
     </p>
   </div>
+
+
+  <h4>
+    Pokud by jsi se chtěl validovat i na jiných servech VŠE, kteří jsou na tento systém napojeni,
+    pošli následující zprávu do jejich verifikačního kanálu:
+  </h4>
+  <div class="discord-message">
+    <div class="discord-message__avatar"></div>
+    <div class="discord-message__content">
+      <div class="discord-message__username"><%= current_user.display_name %></div>
+      <h5 class="discord-message__text">+verify <%= @verification.code %></h5>
+    </div>
+  </div>
 <% end %>

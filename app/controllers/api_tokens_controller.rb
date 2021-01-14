@@ -9,7 +9,7 @@ class ApiTokensController < ApplicationController
   end
 
   def new
-    @token = ApiToken.new value: SecureRandom.hex(128)
+    @token = ApiToken.new value: SecureRandom.hex(64)
     @token.save!
 
     redirect_to api_tokens_url

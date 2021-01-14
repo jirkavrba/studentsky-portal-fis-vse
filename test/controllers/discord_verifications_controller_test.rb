@@ -21,7 +21,7 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
     verification = discord_verifications(:banned_user)
 
     post complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209),
-         params: { api_token: api_tokens(:default).value }
+         headers: { 'X-Api-Token': api_tokens(:default).value }
 
     assert_response :unprocessable_entity
   end
@@ -30,7 +30,7 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
     verification = discord_verifications(:already_verified)
 
     post complete_discord_verification_url(code: verification.code, discord_id: verification.discord_id),
-         params: { api_token: api_tokens(:default).value }
+         headers: { 'X-Api-Token': api_tokens(:default).value }
 
     assert_response :unprocessable_entity
   end
@@ -45,7 +45,9 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
   test 'user verifications can be checked' do
     verification = discord_verifications(:already_verified)
 
-    get check_discord_verification_url(discord_id: verification.discord_id), params: { api_token: api_tokens(:default).value }
+    get check_discord_verification_url(discord_id: verification.discord_id),
+        headers: { 'X-Api-Token': api_tokens(:default).value }
+
     assert_response :success
 
     body = JSON.parse(response.body)
@@ -55,7 +57,9 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'missing user verifications cannot be checked' do
-    get check_discord_verification_url(discord_id: 42069), params: { api_token: api_tokens(:default).value }
+    get check_discord_verification_url(discord_id: 42069),
+        headers: { 'X-Api-Token': api_tokens(:default).value }
+
     assert_response :not_found
   end
 end

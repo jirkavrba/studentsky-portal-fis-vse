@@ -11,11 +11,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_valid_api_token!
-    if params[:api_token].nil?
-      return render json: { message: :missing_api_token }, status: :unauthorized
-    end
+    return render json: { message: :missing_api_token }, status: :unauthorized if request.headers['x-api-token'].nil?
 
-    if ApiToken.find_by(value: params[:api_token]).nil?
+    if ApiToken.find_by(value: request.headers['x-api-token']).nil?
       render json: { message: :invalid_api_token }, status: :unauthorized
     end
   end

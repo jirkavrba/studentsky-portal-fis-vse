@@ -41,4 +41,21 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
     post complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209)
     assert_response :unauthorized
   end
+
+  test 'user verifications can be checked' do
+    verification = discord_verifications(:already_verified)
+
+    get check_discord_verification_url(discord_id: verification.discord_id), params: { api_token: api_tokens(:default).value }
+    assert_response :success
+
+    body = JSON.parse(response.body)
+
+    assert_equal 'admin', body['username']
+    assert_equal 'admin@vse.cz', body['email']
+  end
+
+  test 'missing user verifications cannot be checked' do
+    get check_discord_verification_url(discord_id: 42069), params: { api_token: api_tokens(:default).value }
+    assert_response :not_found
+  end
 end

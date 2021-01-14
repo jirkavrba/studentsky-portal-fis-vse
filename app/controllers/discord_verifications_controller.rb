@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DiscordVerificationsController < ApplicationController
-  before_action :authenticate!, except: [:complete]
+  before_action :authenticate!, only: [:show_code]
   before_action :require_valid_api_token!, except: [:show_code]
 
   def show_code
@@ -34,6 +34,21 @@ class DiscordVerificationsController < ApplicationController
     verification.discord_id = params[:discord_id]
     verification.save!
 
-    render json: { status: :verified, message: 'Account verified.' }
+    render json: { status: :verified,
+                   message: 'Account verified.',
+                   username: user.username }
+  end
+
+  def check
+    verification = DiscordVerification.find_by discord_id: params[:discord_id]
+
+    if verification.nil?
+      return render json: { status: :verification_entry_not_found,
+                            message: 'There is no active verification with the specified code.' },
+                    status: :not_found
+    end
+
+    render json: { username: verification.user.username,
+                   email: "#{verification.user.username}@vse.cz" }
   end
 end

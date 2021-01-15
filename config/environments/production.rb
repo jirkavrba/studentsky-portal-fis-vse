@@ -120,7 +120,10 @@ Rails.application.configure do
 
   config.host = 'portal.fis-vse.cz'
   
-  config.action_mailer.default_url_options = { host: 'portal.fis-vse.cz' }
+  config.action_mailer.default_url_options = {
+    host: 'portal.fis-vse.cz',
+    protocol: 'https'
+  }
 
   ActionMailer::Base.smtp_settings = {
     user_name: ENV['SMTP_USERNAME'],

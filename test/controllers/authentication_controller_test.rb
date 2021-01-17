@@ -134,6 +134,10 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
 
     assert user.is_verified
     assert_nil user.email_verification
+
+    # Validate that username is hashed after a successful verification
+    assert_nil User.find_by username: 'vrbj04'
+    assert_not_nil User.find_by username: Digest::RMD160.hexdigest('vrbj04')
   end
 
   test 'blacklisted users cannot sign up their account' do

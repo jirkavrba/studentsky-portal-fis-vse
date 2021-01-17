@@ -18,7 +18,8 @@ class ActiveSupport::TestCase
     user = users(name)
 
     post sign_in_url, params: {
-      username: user.username,
+      # Username is matched with the name, because it's actually stored as RipeMD160 hash
+      username: user.name,
       password: name
     }
   end

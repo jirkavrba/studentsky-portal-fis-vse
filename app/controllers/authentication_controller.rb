@@ -11,12 +11,13 @@ class AuthenticationController < ApplicationController
 
   def process_login
     login_params = params.permit(:username, :password)
-    user = User.find_by username: login_params[:username]
+    user = User.find_by username: Digest::RMD160.hexdigest(login_params[:username])
 
     unless user.present? && user.authenticate(login_params[:password])
-      return redirect_to sign_in_url, alert: 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.'
+      return redirect_to sign_in_url, alert: 'Nesprávné přihlašovací údaje nebo účet nebyl aktivován odkazem v emailu.'
     end
 
+    # Failsafe to prevent users registering with Ripemd160 hashes as their usernames
     unless user.is_verified
       return redirect_to sign_in_url, alert: 'Tento účet ještě nebyl aktivován pomocí odkazu v emailu.'
     end
@@ -61,11 +62,11 @@ class AuthenticationController < ApplicationController
 
     return redirect_to sign_in_url, alert: 'Neplatný aktivační odkaz.' if verification.nil?
 
-    verification.user.update! is_verified: true
+    # TODO: Maybe add database index to usernames and update it here for better performance
+    verification.user.update! is_verified: true, username: Digest::RMD160.hexdigest(verification.user.username)
     verification.delete
 
-    redirect_to sign_in_url,
-                notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
+    redirect_to sign_in_url, notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
   end
 
   def new_verification_email; end
@@ -92,7 +93,6 @@ class AuthenticationController < ApplicationController
 
     AuthenticationMailer.with(user: user).verification_email.deliver_later
 
-    redirect_to sign_in_url,
-                notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
+    redirect_to sign_in_url, notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
   end
 end

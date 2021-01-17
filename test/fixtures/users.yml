@@ -1,8 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 verified_user:
-  username: verified_user
-  name: Verified user
+  username: <%= Digest::RMD160.hexdigest('verified_user') %>
+  name: verified_user
   password_digest: <%= BCrypt::Password.create('verified_user') %>
   is_admin: false
   is_banned: false
@@ -10,23 +10,23 @@ verified_user:
 
 non_verified_user:
   username: non_verified_user
-  name: Verified user, but not really
+  name: non_verified_user
   password_digest: <%= BCrypt::Password.create('non_verified_user') %>
   is_admin: false
   is_banned: false
   is_verified: false
 
 admin_user:
-  username: admin
-  name: Admin user
+  username: <%= Digest::RMD160.hexdigest('admin') %>
+  name: admin
   password_digest: <%= BCrypt::Password.create('admin_user') %>
   is_admin: true
   is_banned: false
   is_verified: true
 
 banned_user:
-  username: badb0i
-  name: Bad guy
+  username: <%= Digest::RMD160.hexdigest('badb0i') %>
+  name: badb0i
   password_digest: <%= BCrypt::Password.create('banned_user') %>
   is_admin: false
   is_banned: true

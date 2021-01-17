@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_secure_password
 
@@ -7,11 +9,18 @@ class User < ApplicationRecord
   extend Blacklist
 
   validates :username, presence: true,
-                       uniqueness: true,
                        format: { with: /\A[0-9a-z]+\z/ },
                        exclusion: { in: blacklist }
 
+  validate :unique_username
+
   def display_name
     name.empty? ? username : name
+  end
+
+  def unique_username
+    User.where(username: username)
+        .or(User.where(username: Digest::RMD160.hexdigest(username)))
+        .none?
   end
 end

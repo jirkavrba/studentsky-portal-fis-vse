@@ -9,7 +9,7 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
     user = users(:verified_user)
 
     post sign_in_url, params: {
-      username: user.username,
+      username: user.name,
       password: 'verified_user'
     }
 
@@ -34,7 +34,7 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
       password: 'non_verified_user'
     }
 
-    assert_equal 'Tento účet ještě nebyl aktivován pomocí odkazu v emailu.', flash[:alert]
+    assert_equal 'Nesprávné přihlašovací údaje nebo účet nebyl aktivován odkazem v emailu.', flash[:alert]
     assert_redirected_to sign_in_url
 
     assert_nil session[:user_id]
@@ -43,10 +43,8 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
   test 'banned users cannot sign in' do
     sign_out
 
-    user = users(:banned_user)
-
     post sign_in_url, params: {
-      username: user.username,
+      username: 'badb0i',
       password: 'banned_user'
     }
 
@@ -78,7 +76,7 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
       password: 'somebody_once_told_me'
     }
 
-    assert_equal 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.', flash[:alert]
+    assert_equal 'Nesprávné přihlašovací údaje nebo účet nebyl aktivován odkazem v emailu.', flash[:alert]
     assert_redirected_to sign_in_url
 
     post sign_in_url, params: {
@@ -86,7 +84,7 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
       password: 'I_aint_the_sharpest_tool_in_the_shed'
     }
 
-    assert_equal 'Nesprávné přihlašovací údaje nebo uživatel neexistuje.', flash[:alert]
+    assert_equal 'Nesprávné přihlašovací údaje nebo účet nebyl aktivován odkazem v emailu.', flash[:alert]
     assert_redirected_to sign_in_url
   end
 
@@ -142,7 +140,7 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
     sign_out
 
     # Note that this is not personal, just a representative sample
-    blacklisted = %w(adaa04 adamek advorak aled02 alga01 alin00 andrlikh antj00 arltova arlt)
+    blacklisted = %w[adaa04 adamek advorak aled02 alga01 alin00 andrlikh antj00 arltova arlt]
 
     blacklisted.each do |username|
       post sign_up_url, params: {
@@ -155,5 +153,29 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
 
       assert_redirected_to sign_up_url
     end
+  end
+
+  test 'users must have unique usernames, even when ripemd hashed' do
+    # This user is verified and therefore hashed in the database
+    post sign_up_url, params: {
+      user: {
+        username: 'verified_user',
+        password: 'verified_user'
+      }
+    }
+
+    assert_redirected_to sign_up_url
+    assert_equal ['Username is invalid'], flash[:alert]
+
+    # This user is not verified yet and therefore plaintext in the database
+    post sign_up_url, params: {
+      user: {
+        username: 'non_verified_user',
+        password: 'non_verified_user'
+      }
+    }
+
+    assert_redirected_to sign_up_url
+    assert_equal ['Username is invalid'], flash[:alert]
   end
 end

@@ -16,7 +16,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 10.13.0
+          node-version: 10.23.1
 
       - name: Cache ruby gems
         uses: actions/cache@v2

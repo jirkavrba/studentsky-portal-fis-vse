@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin_privileges!
 
   # GET /subjects
   # GET /subjects.json

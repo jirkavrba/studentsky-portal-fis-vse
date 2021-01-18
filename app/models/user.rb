@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validate :unique_username
 
   def display_name
-    name.empty? ? username : name
+    name.empty? ? username.truncate(16) : name
   end
 
   def unique_username

@@ -51,7 +51,7 @@
             </li>
           <% end %>
           <li class="nav-item">
-            <a href="#TODO_add-profile-link-here" class="nav-link <%= current_user.is_admin ? 'text-danger' : 'text-dark' %>">
+            <a href="<%= user_url(current_user) %>" class="nav-link <%= current_user.is_admin ? 'text-danger' : 'text-dark' %>">
               <img src="<%= current_user.avatar_url 32 %>" class="rounded-circle me-2">
               <%= current_user.display_name %>
             </a>

@@ -53,7 +53,7 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
     body = JSON.parse(response.body)
 
     assert_equal Digest::RMD160.hexdigest('admin'), body['username']
-    assert_equal 'admin@vse.cz', body['email']
+    assert_equal "#{Digest::RMD160.hexdigest('admin')}@vse.cz", body['email']
   end
 
   test 'missing user verifications cannot be checked' do

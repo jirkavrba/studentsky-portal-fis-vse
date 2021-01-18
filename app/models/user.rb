@@ -18,6 +18,10 @@ class User < ApplicationRecord
     name.empty? ? username.truncate(16) : name
   end
 
+  def avatar_url
+    "https://xn--i-7iq.ws/emoji-image/#{(0x1F601 + id).chr('UTF-8')}.png?format=emojione"
+  end
+
   def unique_username
     User.where(username: username)
         .or(User.where(username: Digest::RMD160.hexdigest(username)))

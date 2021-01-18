@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_134135) do
 
   create_table "discord_servers", force: :cascade do |t|
     t.string "embed_url"
+    t.string "invite_url"
     t.integer "priority"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

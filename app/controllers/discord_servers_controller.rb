@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DiscordServersController < ApplicationController
-  before_action :set_discord_server, only: [:show, :edit, :update, :destroy]
+  before_action :set_discord_server, only: %i[show edit update destroy]
   before_action :require_admin_privileges!
 
   # GET /discord_servers
@@ -10,8 +12,7 @@ class DiscordServersController < ApplicationController
 
   # GET /discord_servers/1
   # GET /discord_servers/1.json
-  def show
-  end
+  def show; end
 
   # GET /discord_servers/new
   def new
@@ -19,8 +20,7 @@ class DiscordServersController < ApplicationController
   end
 
   # GET /discord_servers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /discord_servers
   # POST /discord_servers.json
@@ -63,13 +63,14 @@ class DiscordServersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_discord_server
-      @discord_server = DiscordServer.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def discord_server_params
-      params.require(:discord_server).permit(:embed_url, :priority)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_discord_server
+    @discord_server = DiscordServer.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def discord_server_params
+    params.require(:discord_server).permit(:embed_url, :priority)
+  end
 end

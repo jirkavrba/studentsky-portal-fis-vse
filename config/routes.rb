@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :discord_servers
   root to: 'home#index'
 
   get '/sign_in', to: 'authentication#login'
@@ -34,6 +33,10 @@ Rails.application.routes.draw do
         format: :json
   end
 
-  resources :users, only: [:index, :show, :destroy]
-  resources :api_tokens, only: [:index, :new, :destroy]
+  scope '/admin' do
+    resources :users, only: [:index, :show, :destroy]
+    resources :api_tokens, only: [:index, :new, :destroy]
+    resources :subjects
+    resources :discord_servers
+  end
 end

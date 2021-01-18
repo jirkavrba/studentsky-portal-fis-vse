@@ -1,7 +1,8 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
-
   test 'guest users cannot view their code' do
     sign_out
 
@@ -20,7 +21,7 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
   test 'banned users cannot verify their discord account' do
     verification = discord_verifications(:banned_user)
 
-    post complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209),
+    post complete_discord_verification_url(code: verification.code, discord_id: 238_728_915_647_070_209),
          headers: { 'X-Api-Token': api_tokens(:default).value }
 
     assert_response :unprocessable_entity
@@ -38,7 +39,7 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
   test 'users cannot verify account without API token' do
     verification = discord_verifications(:verified_user)
 
-    post complete_discord_verification_url(code: verification.code, discord_id: 238728915647070209)
+    post complete_discord_verification_url(code: verification.code, discord_id: 238_728_915_647_070_209)
     assert_response :unauthorized
   end
 
@@ -57,7 +58,7 @@ class DiscordVerificationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'missing user verifications cannot be checked' do
-    get check_discord_verification_url(discord_id: 42069),
+    get check_discord_verification_url(discord_id: 42_069),
         headers: { 'X-Api-Token': api_tokens(:default).value }
 
     assert_response :not_found

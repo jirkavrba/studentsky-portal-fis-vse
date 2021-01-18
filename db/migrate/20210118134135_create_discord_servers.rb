@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDiscordServers < ActiveRecord::Migration[6.1]
   def change
     create_table :discord_servers do |t|

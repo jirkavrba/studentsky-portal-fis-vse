@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   root to: 'home#index'
 
   get '/sign_in', to: 'authentication#login'
@@ -34,8 +35,8 @@ Rails.application.routes.draw do
   end
 
   scope '/admin' do
-    resources :users, only: [:index, :show, :destroy]
-    resources :api_tokens, only: [:index, :new, :destroy]
+    resources :users, only: %i[index show destroy]
+    resources :api_tokens, only: %i[index new destroy]
     resources :subjects
     resources :discord_servers
   end

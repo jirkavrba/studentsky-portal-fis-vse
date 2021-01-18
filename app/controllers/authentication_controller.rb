@@ -66,7 +66,8 @@ class AuthenticationController < ApplicationController
     verification.user.update! is_verified: true, username: Digest::RMD160.hexdigest(verification.user.username)
     verification.delete
 
-    redirect_to sign_in_url, notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
+    redirect_to sign_in_url,
+                notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
   end
 
   def new_verification_email; end
@@ -93,6 +94,7 @@ class AuthenticationController < ApplicationController
 
     AuthenticationMailer.with(user: user).verification_email.deliver_later
 
-    redirect_to sign_in_url, notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
+    redirect_to sign_in_url,
+                notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
   end
 end

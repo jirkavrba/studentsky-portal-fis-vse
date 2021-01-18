@@ -1,0 +1,21 @@
+<%= image_tag @discord_server.embed_url %>
+
+<div class="mt-3">
+  <p>
+    <strong>Embed url:</strong>
+    <%= link_to @discord_server.embed_url, @discord_server.embed_url, target: '_blank' %>
+  </p>
+
+  <p>
+    <strong>Invite url:</strong>
+    <%= link_to @discord_server.invite_url, @discord_server.invite_url, target: '_blank' %>
+  </p>
+
+  <p>
+    <strong>Priority:</strong>
+    <%= @discord_server.priority %>
+  </p>
+</div>
+
+<%= link_to 'Back', discord_servers_path, class: 'btn btn-secondary' %>
+<%= link_to 'Edit', edit_discord_server_path(@discord_server), class: 'btn btn-primary' %>

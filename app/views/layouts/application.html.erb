@@ -31,7 +31,7 @@
         </li>
         <% if authenticated? %>
           <li class="nav-item">
-            <%= link_to "Discord ověření", discord_verification_url, class: "nav-link text-black-50" %>
+            <%= link_to "Discord", discord_url, class: "nav-link text-black-50" %>
           </li>
         <% end %>
       </ul>
@@ -45,6 +45,7 @@
               <ul class="dropdown-menu" aria-labelledby="adminDropdown">
                 <%= link_to "Správa uživatelů", users_url, class: "dropdown-item text-dark" %>
                 <%= link_to "Správa API tokenů", api_tokens_url, class: "dropdown-item text-dark" %>
+                <%= link_to "Správa Discord serverů", discord_servers_url, class: "dropdown-item text-dark" %>
               </ul>
             </li>
           <% end %>

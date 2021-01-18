@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-class DiscordVerificationsController < ApplicationController
-  before_action :authenticate!, only: [:show_code]
-  before_action :require_valid_api_token!, except: [:show_code]
+class DiscordController < ApplicationController
+  before_action :authenticate!, only: %i[index show_code]
+  before_action :require_valid_api_token!, except: %i[index show_code]
 
   # Disable authenticity_token check which causes API request to fail
   skip_before_action :verify_authenticity_token, except: [:show_code]
+
+  def index
+    @servers = DiscordServer.order(priority: :desc).all
+  end
 
   def show_code
     @verification = current_user.discord_verification || DiscordVerification.new(user_id: current_user.id,

@@ -1,0 +1,21 @@
+<h1>VŠE na Discordu</h1>
+
+<div class="alert alert-info my-4">
+  <b>Verifikace VŠE účtu</b><br>
+  Účet je možné verifikovat zprávou, kterou
+  naleznete <%= link_to "zde", discord_verification_url, class: "alert-link" %>
+</div>
+
+<hr>
+
+<h4>Propojené servery</h4>
+
+<div class="row">
+  <% @servers.each do |server| %>
+    <div class="col-sm-12 col-md-3">
+      <div class="mt-3 text-center">
+        <%= link_to image_tag(server.embed_url), server.invite_url, target: '_blank', class: 'rounded' %>
+      </div>
+    </div>
+  <% end %>
+</div>

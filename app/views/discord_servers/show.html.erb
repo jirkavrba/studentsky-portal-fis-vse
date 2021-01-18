@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Embed url:</strong>
+  <%= @discord_server.embed_url %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @discord_server.priority %>
+</p>
+
+<%= link_to 'Edit', edit_discord_server_path(@discord_server) %> |
+<%= link_to 'Back', discord_servers_path %>

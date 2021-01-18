@@ -1,0 +1,27 @@
+<%= form_with(model: discord_server) do |form| %>
+  <% if discord_server.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(discord_server.errors.count, "error") %> prohibited this discord_server from being saved:</h2>
+
+      <ul>
+        <% discord_server.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :embed_url %>
+    <%= form.text_field :embed_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.number_field :priority %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

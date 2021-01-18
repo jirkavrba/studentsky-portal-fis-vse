@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :embed_url %>
-    <%= form.text_field :embed_url %>
+    <%= form.text_field :embed_url, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :priority %>
-    <%= form.number_field :priority %>
+    <%= form.number_field :priority, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions mt-3 form-group">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

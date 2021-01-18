@@ -71,6 +71,6 @@ class DiscordServersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def discord_server_params
-    params.require(:discord_server).permit(:embed_url, :priority)
+    params.require(:discord_server).permit(:embed_url, :invite_url, :priority)
   end
 end

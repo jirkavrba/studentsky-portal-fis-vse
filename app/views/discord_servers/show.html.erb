@@ -3,7 +3,12 @@
 <div class="mt-3">
   <p>
     <strong>Embed url:</strong>
-    <%= @discord_server.embed_url %>
+    <%= link_to @discord_server.embed_url, @discord_server.embed_url, target: '_blank' %>
+  </p>
+
+  <p>
+    <strong>Invite url:</strong>
+    <%= link_to @discord_server.invite_url, @discord_server.invite_url, target: '_blank' %>
   </p>
 
   <p>

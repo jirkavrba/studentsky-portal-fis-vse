@@ -1,38 +1,38 @@
 <h1>Ověření účtu na fakultním Discord serveru.</h1>
 
-<% if @verification.discord_id.nil? %>
-  <div class="my-5">
-    <h5>Pokud ještě nejsi členem, můžeš se připojit na náš</h5>
-    <a href="https://discord.gg/yZMhTVQdkX" target="_blank" rel="nofollow" class="btn btn-lg btn-primary">Fakultní Discord</a>
-  </div>
+<div class="mt-5">
+  <% if @verification.discord_id.nil? %>
 
-  <h4>Po přečtení pravidel se pak autorizuj následující zprávou v kanálu <span class="discord-channel">#verifikace</span></h4>
+    <h4>Po přečtení pravidel se pak autorizuj následující zprávou v kanálu
+      <span class="discord-channel">#verifikace</span></h4>
 
-  <div class="discord-message">
-    <div class="discord-message__avatar"></div>
-    <div class="discord-message__content">
-      <div class="discord-message__username"><%= current_user.display_name %></div>
-      <h5 class="discord-message__text">+verify <%= @verification.code %></h5>
+    <div class="discord-message">
+      <div class="discord-message__avatar"></div>
+      <div class="discord-message__content">
+        <div class="discord-message__username"><%= current_user.display_name %></div>
+        <h5 class="discord-message__text">+verify <%= @verification.code %></h5>
+      </div>
     </div>
-  </div>
-<% else %>
-  <div class="mt-5">
-    <h4 class="text-success">Účet byl verifikován!</h4>
-    <p>
-      Pokud se něco pokazilo a nebyla ti přidělena role <span class="discord-role">Verifikovaný student VŠE</span>, zkus pingnout někoho z moderátorů serveru.
-    </p>
-  </div>
-
-
-  <h4>
-    Pokud by jsi se chtěl validovat i na jiných servech VŠE, kteří jsou na tento systém napojeni,
-    pošli následující zprávu do jejich verifikačního kanálu:
-  </h4>
-  <div class="discord-message">
-    <div class="discord-message__avatar"></div>
-    <div class="discord-message__content">
-      <div class="discord-message__username"><%= current_user.display_name %></div>
-      <h5 class="discord-message__text">+verify <%= @verification.code %></h5>
+  <% else %>
+    <div class="mt-5">
+      <h4 class="text-success">Účet byl verifikován!</h4>
+      <p>
+        Pokud se něco pokazilo a nebyla ti přidělena role <span class="discord-role">Verifikovaný student VŠE</span>,
+        zkus pingnout někoho z moderátorů serveru.
+      </p>
     </div>
-  </div>
-<% end %>
+
+
+    <h4>
+      Pokud by jsi se chtěl validovat i na jiných servech VŠE, kteří jsou na tento systém napojeni,
+      pošli následující zprávu do jejich verifikačního kanálu:
+    </h4>
+    <div class="discord-message">
+      <div class="discord-message__avatar"></div>
+      <div class="discord-message__content">
+        <div class="discord-message__username"><%= current_user.display_name %></div>
+        <h5 class="discord-message__text">+verify <%= @verification.code %></h5>
+      </div>
+    </div>
+  <% end %>
+</div>

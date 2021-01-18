@@ -8,6 +8,7 @@ class DiscordController < ApplicationController
   skip_before_action :verify_authenticity_token, except: [:show_code]
 
   def index
+    @servers = DiscordServer.order(priority: :desc).all
   end
 
   def show_code

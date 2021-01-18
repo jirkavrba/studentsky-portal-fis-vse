@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :subjects
   resources :discord_servers
   root to: 'home#index'
 

@@ -18,8 +18,8 @@ class User < ApplicationRecord
     name.empty? ? username.truncate(16) : name
   end
 
-  def avatar_url
-    "https://xn--i-7iq.ws/emoji-image/#{(0x1F601 + id).chr('UTF-8')}.png?format=emojione"
+  def avatar_url size = 128
+    "https://eu.ui-avatars.com/api/?background=random&name=#{username}&size=#{size}"
   end
 
   def unique_username

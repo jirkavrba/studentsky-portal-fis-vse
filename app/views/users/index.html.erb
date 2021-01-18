@@ -20,7 +20,7 @@
   <% @users.each do |user| %>
     <tr <% if user.is_admin %> class="bg-danger text-white" <% end %>>
       <td><%= user.id %></td>
-      <td><img src="<%= user.avatar_url %>" alt="Pseudorandom avatar" width="32" height="32" class="rounded-circle"></td>
+      <td><img src="<%= user.avatar_url 32 %>" class="rounded-circle"></td>
       <td><b><%= user.username %></b></td>
       <td><%= user.name.presence || "-" %></td>
       <td><%= user.is_verified ? "ANO" : "NE" %></td>

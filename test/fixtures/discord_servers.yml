@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  embed_url: MyString
+  embed_url: https://discord.com/api/some-embed-url
+  invite_url: https://discord.gg/some-invite
   priority: 1
 
 two:
-  embed_url: MyString
+  embed_url: https://discord.com/api/another-embed-url
+  invite_url: https://discord.gg/another-invite
   priority: 1

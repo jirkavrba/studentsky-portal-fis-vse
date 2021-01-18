@@ -1,35 +1,41 @@
 <h1>Registrace nového uživatele</h1>
 
-<div class="row mt-2">
-  <div class="col-sm-12 col-md-6">
-    <div class="card">
-      <div class="card-body">
+<div class="ui stackable grid">
+  <div class="eight wide column">
+    <div class="ui raised segment">
+      <div class="ui form">
         <%= form_with model: @user, url: sign_up_url, method: :post do %>
-          <div class="form-group mb-2">
-            <%= label :user, :username, "Školní xname" %><br>
-            <%= text_field :user, :username, class: "form-control", pattern: "^[a-z0-9]+$", required: true %>
-            <small class="text-muted">Např. vrbj04</small>
+          <div class="field">
+            <%= label_tag "Školní xname" %>
+            <div class="ui right labeled input">
+              <%= text_field :user, :username, class: "form-control", pattern: "^[a-z0-9]+$", required: true, placeholder: 'Např. vrbj04' %>
+              <div class="ui label">
+                <div class="text">@vse.cz</div>
+              </div>
+            </div>
           </div>
 
-          <div class="form-group mb-2">
-            <%= label :user, :name, "Jméno a příjmení" %><br>
-            <%= text_field :user, :name, class: "form-control", placeholder: "Nepovinné" %>
+          <div class="field">
+            <%= label :user, :name, "Jméno a příjmení" %>
+            <div class="ui input">
+              <%= text_field :user, :name, class: "form-control", placeholder: "Nepovinné" %>
+            </div>
           </div>
 
-          <div class="form-group mb-2">
+          <div class="field">
             <%= label :user, :password, "Heslo" %>
-            <%= password_field :user, :password, class: "form-control", minlength: 8, required: true %>
+            <div class="ui input">
+              <%= password_field :user, :password, class: "form-control", minlength: 8, required: true %>
+            </div>
             <small class="text-muted">Minimálně 8 znaků</small>
           </div>
 
-          <% if Rails.env.production? %>
-            <hr>
-
-            <%= label :user, :hcaptcha, "Ochrana proti robotům" %>
-            <%= hcaptcha_tags class: "mt-2", theme: :light %>
+          <% unless Rails.env.production? %>
+            <div class="field">
+              <%= label :user, :hcaptcha, "Ochrana proti robotům" %>
+              <%= hcaptcha_tags class: "mt-2", theme: :light %>
+            </div>
           <% end %>
-
-          <hr>
 
           <div class="d-grid gap-2">
             <%= submit_tag "Registrovat se", class: "btn btn-lg btn-primary btn-fluid" %>
@@ -42,16 +48,15 @@
     </div>
   </div>
 
-  <div class="col-sm-12 col-md-6">
-    <div class="alert alert-danger">
-      <b>Po registraci je potřeba účet aktivovat!</b>
-      <hr>
+  <div class="eight wide column">
+    <div class="ui info message">
+      <div class="header">Po registraci je potřeba účet aktivovat!</div>
       <p>
-        Po registraci bude na email <code>username@vse.cz</code> odeslán odkaz pro aktivaci účtu. <br>
-        Po kliknutí na něj se zpřístupní přihlášení do portálu.
+        Po registraci bude na email <b>username@vse.cz</b> odeslán odkaz pro aktivaci účtu. <br>
+        Teprve až po kliknutí na něj se zpřístupní přihlášení do portálu.
       </p>
     </div>
 
-    <%= link_to "Přihlášení jako registrovaný uživatel", sign_in_url, class: "btn btn-dark"  %>
+    <%= link_to "Přihlášení jako registrovaný uživatel", sign_in_url, class: "ui button" %>
   </div>
 </div>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :discord_servers
   root to: 'home#index'
 
   get '/sign_in', to: 'authentication#login'
@@ -18,16 +19,17 @@ Rails.application.routes.draw do
   get '/users/ban/:id', to: 'users#ban', as: 'ban'
   get '/users/unban/:id', to: 'users#unban', as: 'unban'
 
-  get '/discord/verification', to: 'discord_verifications#show_code', as: 'discord_verification'
+  get '/discord/', to: 'discord#index', as: 'discord'
+  get '/discord/verification', to: 'discord#show_code', as: 'discord_verification'
 
   scope '/api' do
     post '/discord/complete_verification/:code/:discord_id',
-         to: 'discord_verifications#complete',
+         to: 'discord#complete',
          as: 'complete_discord_verification',
          format: :json
 
     get '/discord/check_verification/:discord_id',
-        to: 'discord_verifications#check',
+        to: 'discord#check',
         as: 'check_discord_verification',
         format: :json
   end

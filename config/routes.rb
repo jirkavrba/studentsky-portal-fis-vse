@@ -34,8 +34,9 @@ Rails.application.routes.draw do
         format: :json
   end
 
+  resources :users
+
   scope '/admin' do
-    resources :users, only: %i[index show destroy]
     resources :api_tokens, only: %i[index new destroy]
     resources :subjects
     resources :discord_servers

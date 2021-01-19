@@ -68,4 +68,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal 'New name', user.reload.name
   end
+
+  test 'changing one users changes only that user' do
+    sign_in_as :verified_user
+
+    user = users(:verified_user)
+
+    patch user_url(user), params: {
+      user: {
+        name: 'New name'
+      }
+    }
+
+    assert_equal 'New name', user.reload.name
+    assert_not_equal 'New name', users(:admin_user).name
+  end
 end

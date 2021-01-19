@@ -18,7 +18,7 @@ class User < ApplicationRecord
     name.empty? ? username.truncate(16) : name
   end
 
-  def avatar_url(size = 128)
+  def avatar_url
     "https://avatars.dicebear.com/4.5/api/avataaars/#{username.reverse}.svg"
   end
 

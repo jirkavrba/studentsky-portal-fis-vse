@@ -16,6 +16,11 @@ Rails.application.routes.draw do
 
   get '/verification/:code', to: 'authentication#verify_email', as: 'verification'
 
+  get '/reset_password', to: 'authentication#new_password_reset_request'
+  post '/reset_password', to: 'authentication#process_password_reset_request'
+
+  get '/reset_password/:code', to: 'authentication#process_password_reset', as: 'password_reset'
+
   get '/users/ban/:id', to: 'users#ban', as: 'ban'
   get '/users/unban/:id', to: 'users#unban', as: 'unban'
 

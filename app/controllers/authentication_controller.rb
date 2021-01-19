@@ -66,11 +66,12 @@ class AuthenticationController < ApplicationController
     verification.user.update! is_verified: true, username: Digest::RMD160.hexdigest(verification.user.username)
     verification.delete
 
-    redirect_to sign_in_url,
-                notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
+    redirect_to sign_in_url, notice: "Účet #{verification.user.display_name} byl aktivován a je nyní možné se přihlásit."
   end
 
   def new_verification_email; end
+
+  def new_password_reset_request; end
 
   def process_new_verification_email
     verification_params = params.permit(:username, :password)
@@ -96,5 +97,46 @@ class AuthenticationController < ApplicationController
 
     redirect_to sign_in_url,
                 notice: "Na email #{user.username}@vse.cz byl odeslán nový aktivační odkaz. Původní odkaz byl tímto zneplatněn."
+  end
+
+  def process_password_reset_request
+    password_reset_params = params.permit(:username)
+
+    if Rails.env.production? && !verify_hcaptcha(model: @user)
+      return redirect_to reset_password_url, alert: 'Nevyplněná ochrana proti robotům.'
+    end
+
+    user = User.find_by username: Digest::RMD160.hexdigest(password_reset_params[:username])
+
+    if user.nil?
+      return redirect_to reset_password_url, alert: 'Uživatel neexistuje nebo nebyl účet nebyl ještě aktivován.'
+    end
+
+    unless user.password_reset_token.nil?
+      return redirect_to reset_password_url, alert: 'Tento účet má již aktivní žádost o obnovení hesla.'
+    end
+
+    user.password_reset_token = SecureRandom.urlsafe_base64(128)
+    user.save!
+
+    # Username must be explicitly passed to the mailer, as the username stored is hashed and cannot be used
+    AuthenticationMailer.with(user: user, username: password_reset_params[:username]).password_reset_email.deliver_later
+
+    redirect_to sign_in_url, notice: "Na email #{password_reset_params[:username]}@vse.cz byl odeslán odkaz pro obnovení hesla."
+  end
+
+  def process_password_reset
+    user = User.find_by password_reset_token: params[:code]
+
+    if user.nil?
+      return redirect_to sign_in_url, alert: 'Neplatný odkaz.'
+    end
+
+    user.password_reset_token = nil
+    user.save!
+
+    session[:user_id] = user.id
+
+    redirect_to user_url(user), notice: "Dočasně přihlášen jako #{user.display_name}, nyní je možné obnovit si heslo."
   end
 end

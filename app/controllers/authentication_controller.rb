@@ -120,7 +120,7 @@ class AuthenticationController < ApplicationController
     user.save!
 
     # Username must be explicitly passed to the mailer, as the username stored is hashed and cannot be used
-    AuthenticationMailer.with(user: user, username: password_reset_params[:username]).password_reset_email.deliver_later
+    AuthenticationMailer.with(user: user.reload, username: password_reset_params[:username]).password_reset_email.deliver_later
 
     redirect_to sign_in_url, notice: "Na email #{password_reset_params[:username]}@vse.cz byl odeslán odkaz pro obnovení hesla."
   end

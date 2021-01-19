@@ -7,12 +7,8 @@ class DiscordServersController < ApplicationController
   # GET /discord_servers
   # GET /discord_servers.json
   def index
-    @discord_servers = DiscordServer.all
+    @discord_servers = DiscordServer.order(priority: :desc).all
   end
-
-  # GET /discord_servers/1
-  # GET /discord_servers/1.json
-  def show; end
 
   # GET /discord_servers/new
   def new
@@ -29,7 +25,7 @@ class DiscordServersController < ApplicationController
 
     respond_to do |format|
       if @discord_server.save
-        format.html { redirect_to @discord_server, notice: 'Discord server was successfully created.' }
+        format.html { redirect_to discord_servers_url, notice: 'Discord server was successfully created.' }
         format.json { render :show, status: :created, location: @discord_server }
       else
         format.html { render :new }
@@ -43,7 +39,7 @@ class DiscordServersController < ApplicationController
   def update
     respond_to do |format|
       if @discord_server.update(discord_server_params)
-        format.html { redirect_to @discord_server, notice: 'Discord server was successfully updated.' }
+        format.html { redirect_to discord_servers_url, notice: 'Discord server was successfully updated.' }
         format.json { render :show, status: :ok, location: @discord_server }
       else
         format.html { render :edit }

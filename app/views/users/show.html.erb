@@ -1,37 +1,46 @@
-<div class="row">
-  <div class="col-sm-12 col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex align-items-center justify-content-start">
-          <div class="card-title ms-4">
-            <img src="<%= @user.avatar_url 128 %>" alt="Generated avatar">
-            <h3><%= @user.display_name %></h3>
-            <hr>
-            <% if @user.is_admin %>
-              <p class="fw-bold text-danger">Administrátor</p>
-            <% elsif @user.is_banned %>
-              <p class="fw-bold text-danger">Banovaný uživatel</p>
-            <% elsif @user.is_verified %>
-              <p class="text-success">Aktivovaný účet</p>
-            <% else %>
-              <p class="text-danger">Účet čeká na aktivaci</p>
-            <% end %>
-          </div>
-
-          <%= link_to "Upravit účet", edit_user_url(@user), class: 'btn btn-primary' %>
+<div class="ui stackable grid">
+  <div class="five wide column">
+    <div class="ui card">
+      <div class="image">
+        <img src="<%= @user.avatar_url %>">
+      </div>
+      <div class="content">
+        <a class="header"><%= @user.name.presence || "Anonymní účet" %></a>
+        <% if @user.is_admin %>
+          <div>Administrátor</div>
+        <% elsif @user.is_banned %>
+          <div>Banovaný uživatel</div>
+        <% elsif @user.is_verified %>
+          <div>Aktivovaný účet</div>
+        <% else %>
+          <div>Účet čeká na aktivaci</div>
+        <% end %>
+        <div class="meta">
+          <small class="hash"><%= @user.username %></small>
         </div>
-
-        <hr>
-
-        <% if can? :ban, @user %>
+      </div>
+      <% if can? :manage, @user %>
+        <div class="content">
           <% if @user.is_banned %>
-            <%= link_to "Odblokovat účet", unban_url(@user), class: "btn btn-primary", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?"} %>
+            <%= link_to "Odblokovat účet", unban_url(@user), class: "ui secondary button", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?" } %>
           <% else %>
-            <%= link_to "Blokovat účet", ban_url(@user), class: "btn btn-primary", data: { confirm: "Opravdu zabanovat uživatele #{@user.display_name}?"} %>
+            <%= link_to "Blokovat účet", ban_url(@user), class: "ui secondary button", data: { confirm: "Opravdu zabanovat uživatele #{@user.display_name}?" } %>
           <% end %>
 
-          <%= link_to "Smazat účet", user_url(@user), class: "btn btn-danger", data: { confirm: "Opravdu smazat uživatele #{@user.display_name}? Tato akce je nevratná."}, method: :delete %>
-        <% end %>
+          <%= link_to "Smazat účet", user_url(@user), class: "ui button red", data: { confirm: "Opravdu smazat uživatele #{@user.display_name}? Tato akce je nevratná." }, method: :delete %>
+        </div>
+      <% end %>
+      <div class="extra content">
+        <%= link_to "Upravit účet", edit_user_url(@user), class: 'ui fluid button primary' %>
+      </div>
+    </div>
+
+  </div>
+  <div class="ten wide column">
+    <div class="ui placeholder basic segment">
+      <div class="ui icon grey header">
+        <i class="history icon"></i>
+        Tady bude historie nebo nedávná aktivita
       </div>
     </div>
   </div>

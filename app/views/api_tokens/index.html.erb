@@ -1,6 +1,8 @@
 <h1>API tokeny</h1>
 
-<table class="table">
+<%= link_to "Vygenerovat nový API token", new_api_token_url, class: "ui green button" %>
+
+<table class="ui celled table">
     <thead>
         <tr>
             <th>ID</th>
@@ -20,7 +22,7 @@
             <td>
               <%= link_to "Smazat token", api_token_url(token),
                           method: :delete,
-                          class: "btn btn-sm btn-danger",
+                          class: "ui red button",
                           data: {
                             confirm: "Opravdu smazat tento token?"
                           }
@@ -30,5 +32,3 @@
         <% end %>
     </tbody>
 </table>
-
-<%= link_to "Vygenerovat nový API token", new_api_token_url, class: "btn btn-primary" %>

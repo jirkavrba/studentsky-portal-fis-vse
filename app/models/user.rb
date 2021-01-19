@@ -18,8 +18,8 @@ class User < ApplicationRecord
     name.empty? ? username.truncate(16) : name
   end
 
-  def avatar_url(size = 128)
-    "https://eu.ui-avatars.com/api/?background=random&name=#{ERB::Util.url_encode display_name}&size=#{size}"
+  def avatar_url
+    "https://avatars.dicebear.com/4.5/api/avataaars/#{username + avatar_discriminator}.svg"
   end
 
   def unique_username

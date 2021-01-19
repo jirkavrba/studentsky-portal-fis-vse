@@ -29,12 +29,7 @@ class DiscordServersControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to discord_server_url(DiscordServer.last)
-  end
-
-  test 'should show discord_server' do
-    get discord_server_url(@discord_server)
-    assert_response :success
+    assert_redirected_to discord_servers_url
   end
 
   test 'should get edit' do
@@ -50,7 +45,7 @@ class DiscordServersControllerTest < ActionDispatch::IntegrationTest
         priority: @discord_server.priority
       }
     }
-    assert_redirected_to discord_server_url(@discord_server)
+    assert_redirected_to discord_servers_url
   end
 
   test 'should destroy discord_server' do

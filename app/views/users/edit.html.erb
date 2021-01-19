@@ -1,10 +1,51 @@
-<%= form_with(model: @user, url: user_url(@user), method: :patch) do %>
-  <div class="form-group">
-    <%= label_tag "Jméno a příjmení (nepovinné)" %>
-    <%= text_field :user, :name, class: 'form-control' %>
-  </div>
+<h1>Upravit účet</h1>
 
-  <div class="form-group mt-5">
-    <%= submit_tag "Uložit změny", class: 'btn btn-primary' %>
-  </div>
-<% end %>
+<div class="ui centered grid">
+  <%= form_with(model: @user, url: user_url(@user), method: :patch) do %>
+    <div class="ui card">
+      <div class="image">
+        <div class="ui inverted dimmer" id="avatar-dimmer"><div class="ui loader"></div></div>
+        <img src="<%= @user.avatar_url %>" id="avatar"
+             data-template="<%= @user.avatar_url.gsub(@user.avatar_discriminator + ".svg", "DISCRIMINATOR.svg") %>">
+      </div>
+      <div class="content ui form">
+        <%= hidden_field :user, :avatar_discriminator, id: 'avatar_discriminator' %>
+        <div class="ui labeled icon button fluid" id="random-avatar-button">
+          <i class="dice icon"></i>
+          Náhodný avatar
+        </div>
+      </div>
+      <div class="content ui form">
+        <div class="field">
+          <%= label_tag "Jméno a příjmení" %>
+          <%= text_field :user, :name, placeholder: 'Nepovinné' %>
+        </div>
+        <div class="meta">
+          <small class="hash"><%= @user.username %></small>
+        </div>
+      </div>
+      <div class="extra content">
+        <%= submit_tag "Uložit změny", class: 'ui fluid button primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+    $(function () {
+        const image = $("#avatar");
+        const dimmer = $("#avatar-dimmer");
+        const input = $("#avatar_discriminator");
+
+        $("#random-avatar-button").click(function () {
+            const discriminator = (Math.random().toString(36) + Math.random().toString(36)).replace(/\./g, "");
+
+            dimmer.addClass("active");
+
+            image.attr("src", image.data("template").replace("DISCRIMINATOR", discriminator));
+            input.val(discriminator);
+
+            image.on("load", () => dimmer.removeClass("active"));
+        });
+    });
+</script>

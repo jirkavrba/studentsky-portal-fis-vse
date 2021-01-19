@@ -1,27 +1,32 @@
-<h1>Discord Servers</h1>
+<h1>Discord servery</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Embed url</th>
-      <th>Priority</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @discord_servers.each do |discord_server| %>
-      <tr>
-        <td><%= discord_server.embed_url %></td>
-        <td><%= discord_server.priority %></td>
-        <td><%= link_to 'Show', discord_server %></td>
-        <td><%= link_to 'Edit', edit_discord_server_path(discord_server) %></td>
-        <td><%= link_to 'Destroy', discord_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div>
+  <%= link_to 'Přidat Discord server', new_discord_server_path, class: 'ui green button' %>
+</div>
 
 <br>
 
-<%= link_to 'New Discord Server', new_discord_server_path, class: 'btn btn-success' %>
+<div class="ui cards">
+  <% @discord_servers.each do |discord_server| %>
+    <div class="ui card">
+      <div class="image">
+        <%= image_tag discord_server.embed_url %>
+      </div>
+      <div class="content">
+        <p>
+          <strong>Invite url</strong><br>
+          <%= link_to discord_server.invite_url, discord_server.invite_url, target: '_blank' %>
+        </p>
+
+        <p>
+          <strong>Priority:</strong>
+          <%= discord_server.priority %>
+        </p>
+      </div>
+      <div class="content">
+        <%= link_to 'Upravit', edit_discord_server_path(discord_server), class: 'ui primary button' %>
+        <%= link_to 'Smazat', discord_server, method: :delete, class: 'ui red button', data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  <% end %>
+</div>

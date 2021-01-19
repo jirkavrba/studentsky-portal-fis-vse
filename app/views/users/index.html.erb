@@ -3,31 +3,33 @@
 
 <hr>
 
-<table class="table">
+<table class="ui celled table">
   <thead>
-    <tr>
-      <th>ID</th>
-      <th>Vygenerovaný avatar</th>
-      <th>Školní xname / hash</th>
-      <th>Jméno</th>
-      <th>Aktivní účet?</th>
-      <th>Admin?</th>
-      <th>Ban?</th>
-      <th>Akce</th>
-    </tr>
+  <tr>
+    <th>ID</th>
+    <th>Avatar</th>
+    <th>Školní xname / hash</th>
+    <th>Jméno</th>
+    <th>Aktivní účet?</th>
+    <th>Admin?</th>
+    <th>Ban?</th>
+    <th>Akce</th>
+  </tr>
   </thead>
   <tbody>
   <% @users.each do |user| %>
-    <tr <% if user.is_admin %> class="bg-danger text-white" <% end %>>
+    <tr
+    <% if user.is_admin %> class="red"
+    <% end %>>
       <td><%= user.id %></td>
-      <td><img src="<%= user.avatar_url 32 %>" class="rounded-circle"></td>
+      <td><img src="<%= user.avatar_url %>" class="ui mini avatar image"></td>
       <td><b><%= user.username %></b></td>
       <td><%= user.name.presence || "-" %></td>
-      <td><%= user.is_verified ? "ANO" : "NE" %></td>
-      <td><%= user.is_admin ? "ANO" : "NE" %></td>
-      <td><%= user.is_banned ? "ANO" : "NE" %></td>
+      <td><i class="<%= user.is_verified ? "check" : "times" %> icon"></i></td>
+      <td><i class="<%= user.is_admin ? "check" : "times" %> icon"></i></td>
+      <td><i class="<%= user.is_banned ? "check" : "times" %> icon"></i></td>
       <td>
-        <%= link_to 'Zobrazit', user_url(user), class: 'btn btn-sm btn-primary' %>
+        <%= link_to 'Zobrazit', user_url(user), class: 'ui secondary button' %>
       </td>
     </tr>
   <% end %>

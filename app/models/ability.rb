@@ -8,11 +8,15 @@ class Ability
     return unless user.present?
 
     # Grant all privileges to administrators
-    can :manage, :all if user.is_admin
+    if user.is_admin
+      can :manage, :all
+      can :manage, User
+      return
+    end
 
     # Users can manage their own user profile
     can :manage, User, id: user.id
     # But cannot ban, unban or delete it
-    cannot [:ban, :unban, :destroy], User
+    cannot %i[ban unban destroy], User
   end
 end

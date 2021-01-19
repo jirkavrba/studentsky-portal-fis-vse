@@ -9,104 +9,111 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
 </head>
 
-<body>
-<div class="d-flex flex-column" style="min-height: 100vh">
-  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container mt-3">
-      <a class="navbar-brand" href="<%= root_url %>">
-        <h1 class="h3">Studentský portál</h1>
-        <p class="text-uppercase text-muted fw-bold fs-6">Komunitní server pro studenty FIS VŠE v Praze</p>
-      </a>
-    </div>
-  </div>
-  <div class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <ul class="nav">
-        <li class="nav-item">
-          <%= link_to "Domovská stránka", root_url, class: "nav-link text-black-50" %>
-        </li>
-        <% if authenticated? %>
-          <li class="nav-item">
-            <%= link_to "Discord", discord_url, class: "nav-link text-black-50" %>
-          </li>
+<body style="min-height: 100vh; display: flex; flex-flow: column nowrap;">
+<header class="ui inverted relaxed segment">
+  <div class="ui container">
+    <h1 class="ui inverted huge text">Studentský portál</h1>
+    <div class="ui huge text">Komunitní server pro studenty FIS VŠE v Praze</div>
+
+    <div class="ui inverted secondary pointing menu">
+      <%= link_to "Domovská stránka", root_url, class: 'active item' %>
+      <% if authenticated? %>
+        <%= link_to discord_url, class: 'item' do %><i class="discord icon"></i> Discord
         <% end %>
-      </ul>
-      <ul class="nav ms-auto">
+      <% end %>
+
+      <div class="right menu">
         <% if authenticated? %>
           <% if current_user.is_admin %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-black-50" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Administrace
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                <%= link_to "Správa uživatelů", users_url, class: "dropdown-item text-dark" %>
-                <%= link_to "Správa API tokenů", api_tokens_url, class: "dropdown-item text-dark" %>
-                <%= link_to "Správa Discord serverů", discord_servers_url, class: "dropdown-item text-dark" %>
-                <%= link_to "Správa Předmětů", subjects_url, class: "dropdown-item text-dark" %>
-              </ul>
-            </li>
+            <div class="ui dropdown item">
+              <i class="wrench icon"></i>
+              Administrace
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item" href="<%= users_url %>"><i class="users icon"></i> Správa uživatelů</a>
+                <a class="item" href="<%= api_tokens_url %>"><i class="key icon"></i> Správa API tokenů</a>
+                <a class="item" href="<%= discord_servers_url %>"><i class="discord icon"></i> Správa Discord
+                  serverů</a>
+                <a class="item" href="<%= subjects_url %>"><i class="tags icon"></i> Správa předmětů</a>
+              </div>
+            </div>
           <% end %>
-          <li class="nav-item">
-            <a href="<%= user_url(current_user) %>" class="nav-link <%= current_user.is_admin ? 'text-danger' : 'text-dark' %>">
-              <img src="<%= current_user.avatar_url 32 %>" class="rounded-circle me-2">
-              <%= current_user.display_name %>
-            </a>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Odhlásit se", logout_url, class: "nav-link text-black-50" %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Přihlášení", sign_in_url, class: "nav-link text-black-50" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Registrace", sign_up_url, class: "nav-link text-black-50" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <% unless flash[:alert].nil? %>
-    <div class="alert alert-danger">
-      <div class="container">
-        <% if flash[:alert].respond_to?(:each) %>
-          <% flash[:alert].each do |alert| %>
-            <%= alert %><br>
+          <a href="<%= user_url(current_user) %>" class="item">
+            <i class="<%= current_user.is_admin ? "red shield" : "user" %> icon"></i>
+            <%= current_user.display_name %>
+          </a>
+          <%= link_to logout_url, class: "item" do %>
+            <i class="sign out icon"></i> Odhlásit se
           <% end %>
         <% else %>
-          <%= flash[:alert] %>
+          <%= link_to sign_in_url, class: "item" do %>
+            <i class="sign in icon"></i> Přihlásit se
+          <% end %>
+          <%= link_to sign_up_url, class: "item ui text blue" do %>
+            <i class="user plus icon"></i> Registrace
+          <% end %>
         <% end %>
       </div>
+    </div>
+  </div>
+</header>
+<main class="ui wide container" style="flex-grow: 1;">
+  <% unless flash[:alert].nil? %>
+    <div class="ui error message">
+      <% if flash[:alert].respond_to?(:each) %>
+        <b>
+          Během zpracování požadavku došlo k chybám
+        </b>
+        <ul class="list">
+          <% flash[:alert].each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <b>
+          <%= flash[:alert] %>
+        </b>
+      <% end %>
     </div>
   <% end %>
 
   <% unless flash[:notice].nil? %>
-    <div class="alert alert-info">
-      <div class="container">
+    <div class="ui info message">
+      <b>
         <%= flash[:notice] %>
-      </div>
+      </b>
     </div>
   <% end %>
 
-  <div class="container my-3 flex-grow-1">
+  <div class="container horizontally">
     <%= yield %>
   </div>
+</main>
 
-  <footer class="bg-dark py-3">
-    <div class="container text-light">
-      <div class="d-flex align-items-center justify-content-between">
-        <div>
-          <b>&copy; Jiří Vrba, Richard Kraus 2021</b><br>
-          <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank">Zdrojové kódy</a>
-        </div>
-      </div>
+<footer class="ui secondary basic segment">
+  <div class="ui container">
+    <div class="ui secondary pointing above menu">
+      <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank" class="item">
+        <i class="github icon"></i>
+        Zdrojové kódy
+      </a>
+      <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse/issues/new" target="_blank" class="item">
+        <i class="bug icon"></i>
+        Nahlásit chybu
+      </a>
+      <%# TODO: Add privacy policy %>
     </div>
-  </footer>
-</div>
+    <b>&copy; Jiří Vrba, Richard Kraus 2021</b>
+  </div>
+</footer>
+<script>
+    $('.dropdown').dropdown();
+</script>
 </body>
 </html>

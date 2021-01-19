@@ -1,20 +1,23 @@
 <h1>VŠE na Discordu</h1>
 
-<div class="alert alert-info my-4">
-  <b>Verifikace VŠE účtu</b><br>
-  Účet je možné verifikovat zprávou, kterou
-  naleznete <%= link_to "zde", discord_verification_url, class: "alert-link" %>
-</div>
+<%= link_to discord_verification_url, class: "ui big green right labeled icon button" do %>
+  Ověření VŠE účtu
+  <i class="right arrow icon"></i>
+<% end %>
 
-<hr>
+<h3>Propojené servery</h3>
 
-<h4>Propojené servery</h4>
-
-<div class="row">
+<div class="ui stackable cards">
   <% @servers.each do |server| %>
-    <div class="col-sm-12 col-md-3">
-      <div class="mt-3 text-center">
-        <%= link_to image_tag(server.embed_url), server.invite_url, target: '_blank', class: 'rounded' %>
+    <div class="ui card">
+      <div class="image">
+        <%= image_tag(server.embed_url) %>
+      </div>
+      <div class="content">
+        <%= link_to server.invite_url, target: '_blank', class: 'ui fluid secondary right labeled icon button' do  %>
+          Invite link
+          <i class="right arrow icon"></i>
+        <% end %>
       </div>
     </div>
   <% end %>

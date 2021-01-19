@@ -1,32 +1,45 @@
-<%= form_with(model: discord_server) do |form| %>
-  <% if discord_server.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(discord_server.errors.count, "error") %> prohibited this discord_server from being saved:</h2>
+<div class="ui segment">
+  <div class="content">
+    <div class="ui form">
+      <%= form_with(model: discord_server) do |form| %>
+        <% if discord_server.errors.any? %>
+          <div id="error_explanation">
+            <b><%= pluralize(discord_server.errors.count, "error") %> prohibited this Discord server from being
+              saved:</b>
 
-      <ul>
-        <% discord_server.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% discord_server.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="field">
+          <%= form.label :embed_url %>
+          <div class="ui input">
+            <%= form.text_field :embed_url %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label :invite_url %>
+          <div class="ui input">
+            <%= form.text_field :invite_url %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label :priority %>
+          <div class="ui input">
+            <%= form.number_field :priority %>
+          </div>
+        </div>
+
+        <div class="actions mt-3 form-group">
+          <%= form.submit 'Uložit', class: "ui button primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :embed_url %>
-    <%= form.text_field :embed_url, class: 'form-control' %>
   </div>
-
-  <div class="form-group">
-    <%= form.label :invite_url %>
-    <%= form.text_field :invite_url, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :priority %>
-    <%= form.number_field :priority, class: 'form-control' %>
-  </div>
-
-  <div class="actions mt-3 form-group">
-    <%= form.submit class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

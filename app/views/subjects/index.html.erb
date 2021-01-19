@@ -1,27 +1,28 @@
-<h1>Subjects</h1>
+<h1>Předměty</h1>
 
-<table class="table">
+<div>
+  <%= link_to 'Přidat předmět', new_subject_path, class: 'ui green button' %>
+</div>
+
+<table class="ui celled table">
   <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Kód předmětu</th>
+    <th>Název</th>
+    <th>Akce</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @subjects.each do |subject| %>
-      <tr>
-        <td><%= subject.code %></td>
-        <td><%= subject.name %></td>
-        <td><%= link_to 'Show', subject %></td>
-        <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-        <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @subjects.each do |subject| %>
+    <tr>
+      <td><%= subject.code %></td>
+      <td><%= subject.name %></td>
+      <td>
+        <%= link_to 'Upravit', edit_subject_path(subject), class: 'ui button' %>
+        <%= link_to 'Smazat', subject, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button' %>
+      </td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Subject', new_subject_path, class: 'btn btn-success' %>

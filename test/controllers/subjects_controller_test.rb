@@ -23,12 +23,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
       post subjects_url, params: { subject: { code: @subject.code, name: @subject.name } }
     end
 
-    assert_redirected_to subject_url(Subject.last)
-  end
-
-  test 'should show subject' do
-    get subject_url(@subject)
-    assert_response :success
+    assert_redirected_to subjects_url
   end
 
   test 'should get edit' do
@@ -38,7 +33,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update subject' do
     patch subject_url(@subject), params: { subject: { code: @subject.code, name: @subject.name } }
-    assert_redirected_to subject_url(@subject)
+    assert_redirected_to subjects_url
   end
 
   test 'should destroy subject' do

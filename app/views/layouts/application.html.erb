@@ -64,7 +64,6 @@
   </div>
 </header>
 <main class="ui wide container" style="flex-grow: 1;">
-
   <% unless flash[:alert].nil? %>
     <div class="ui error message">
       <% if flash[:alert].respond_to?(:each) %>
@@ -100,8 +99,14 @@
 <footer class="ui secondary basic segment">
   <div class="ui container">
     <div class="ui secondary pointing above menu">
-      <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank" class="item">Zdrojové
-        kódy</a>
+      <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank" class="item">
+        <i class="github icon"></i>
+        Zdrojové kódy
+      </a>
+      <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse/issues/new" target="_blank" class="item">
+        <i class="bug icon"></i>
+        Nahlásit chybu
+      </a>
       <%# TODO: Add privacy policy %>
     </div>
     <b>&copy; Jiří Vrba, Richard Kraus 2021</b>

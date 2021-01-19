@@ -19,20 +19,22 @@
           <small class="hash"><%= @user.username %></small>
         </div>
       </div>
+      <% if can? :manage, @user %>
+        <div class="content">
+          <% if @user.is_banned %>
+            <%= link_to "Odblokovat účet", unban_url(@user), class: "ui secondary button", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?" } %>
+          <% else %>
+            <%= link_to "Blokovat účet", ban_url(@user), class: "ui secondary button", data: { confirm: "Opravdu zabanovat uživatele #{@user.display_name}?" } %>
+          <% end %>
+
+          <%= link_to "Smazat účet", user_url(@user), class: "ui button red", data: { confirm: "Opravdu smazat uživatele #{@user.display_name}? Tato akce je nevratná." }, method: :delete %>
+        </div>
+      <% end %>
       <div class="extra content">
-        <%= link_to "Upravit účet", edit_user_url(@user), class: 'ui button primary' %>
+        <%= link_to "Upravit účet", edit_user_url(@user), class: 'ui fluid button primary' %>
       </div>
     </div>
 
-    <% if can? :manage, @user %>
-      <% if @user.is_banned %>
-        <%= link_to "Odblokovat účet", unban_url(@user), class: "ui button", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?" } %>
-      <% else %>
-        <%= link_to "Blokovat účet", ban_url(@user), class: "ui button", data: { confirm: "Opravdu zabanovat uživatele #{@user.display_name}?" } %>
-      <% end %>
-
-      <%= link_to "Smazat účet", user_url(@user), class: "ui button red", data: { confirm: "Opravdu smazat uživatele #{@user.display_name}? Tato akce je nevratná." }, method: :delete %>
-    <% end %>
   </div>
   <div class="ten wide column">
     <div class="ui placeholder basic segment">

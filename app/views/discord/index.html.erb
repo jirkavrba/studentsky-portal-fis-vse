@@ -7,10 +7,18 @@
 
 <h3>Propojené servery</h3>
 
-<div class="ui stackable grid">
+<div class="ui stackable cards">
   <% @servers.each do |server| %>
-    <div class="five wide column">
-      <%= link_to image_tag(server.embed_url), server.invite_url, target: '_blank' %>
+    <div class="ui card">
+      <div class="image">
+        <%= image_tag(server.embed_url) %>
+      </div>
+      <div class="content">
+        <%= link_to server.invite_url, target: '_blank', class: 'ui fluid secondary right labeled icon button' do  %>
+          Invite link
+          <i class="right arrow icon"></i>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

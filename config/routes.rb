@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :api_tokens, only: %i[index new destroy]
-    resources :subjects
-    resources :discord_servers
+    resources :subjects, except: %i[show]
+    resources :discord_servers, except: %i[show]
   end
 end

@@ -1,53 +1,48 @@
 <h1>Přihlášení do aplikace</h1>
 
-<div class="row mt-2">
-  <div class="col-sm-12 col-md-6">
-    <div class="card">
-      <div class="card-body">
+<div class="ui stackable grid">
+  <div class="ui eight wide column">
+    <div class="ui raised segment">
+      <div class="ui form">
         <%= form_with url: sign_in_url, method: :post do %>
-          <div class="form-group mb-2">
-            <%= label_tag :username, "Školní xname" %><br>
-            <%= text_field_tag :username, "", class: "form-control",
-                                              pattern: "^[a-z0-9]+$",
-                                              placeholder: "Např. vrbj04",
-                                              autofocus: true,
-                                              required: true %>
+          <div class="field">
+            <%= label_tag :username, "Školní xname" %>
+            <div class="ui right labeled input">
+              <%= text_field_tag :username, "", pattern: "^[a-z0-9]+$",
+                                 placeholder: "Např. vrbj04",
+                                 autofocus: true,
+                                 required: true %>
+              <div class="ui label">
+                @vse.cz
+              </div>
+            </div>
           </div>
 
-          <div class="form-group mb-2">
+          <div class="field">
             <%= label_tag :password, "Heslo" %>
-            <%= password_field_tag :password, "", class: "form-control", required: true %>
+            <%= password_field_tag :password, "", required: true %>
+            <small>
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1" target="_blank" class="text-decoration-none">
+                Zapomenuté heslo?
+              </a>
+            </small>
           </div>
 
-          <hr>
-
-          <div class="d-grid gap-2">
-            <%= submit_tag "Přihlásit se", class: "btn btn-lg btn-primary btn-fluid" %>
-          </div>
-
-          <hr>
-
-          <small>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1" target="_blank" class="text-decoration-none">
-              Zapomenuté heslo?
-            </a>
-          </small>
+          <%= submit_tag "Přihlásit se", class: "ui button primary" %>
         <% end %>
-      </div>
-      <div class="card-footer">
-          <code class="text-black-50 fw-bold">IP: <%= request.remote_ip %></code>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-12 col-md-6">
-    <div class="text-muted">
-      <b>Před prvním přihlášením je potřeba účet aktivovat!</b>
+  <div class="eight wide column">
+    <div class="ui warning message">
+      <div class="header">Před prvním přihlášením je potřeba účet aktivovat!</div>
       <p>
-        Pokud email s aktivačním odkazem nedorazil, <a href="<%= new_verification_url %>">nechte si poslat nový.</a>
+        Pokud email s aktivačním odkazem nedorazil,
+        <a href="<%= new_verification_url %>">nechte si poslat nový.</a>
       </p>
     </div>
 
-    <%= link_to "Registrace nového uživatele", sign_up_url, class: "btn btn-dark"  %>
+    <%= link_to "Registrace nového uživatele", sign_up_url, class: "ui button" %>
   </div>
 </div>

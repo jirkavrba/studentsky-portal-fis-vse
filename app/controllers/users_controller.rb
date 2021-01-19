@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def update
     authorize! :manage, @user
 
-    User.update user_params
+    @user.update user_params
 
     redirect_to user_url(@user), notice: 'Změny byly uloženy.'
   end

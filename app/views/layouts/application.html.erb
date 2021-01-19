@@ -68,27 +68,27 @@
   <% unless flash[:alert].nil? %>
     <div class="ui error message">
       <% if flash[:alert].respond_to?(:each) %>
-        <div class="header">
+        <b>
           Během zpracování požadavku došlo k chybám
-        </div>
+        </b>
         <ul class="list">
           <% flash[:alert].each do |alert| %>
             <li><%= alert %></li>
           <% end %>
         </ul>
       <% else %>
-        <div class="header">
+        <b>
           <%= flash[:alert] %>
-        </div>
+        </b>
       <% end %>
     </div>
   <% end %>
 
   <% unless flash[:notice].nil? %>
     <div class="ui info message">
-      <div class="header">
+      <b>
         <%= flash[:notice] %>
-      </div>
+      </b>
     </div>
   <% end %>
 

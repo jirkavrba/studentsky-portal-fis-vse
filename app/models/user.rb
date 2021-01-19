@@ -19,7 +19,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    "https://avatars.dicebear.com/4.5/api/avataaars/#{username.reverse}.svg"
+    "https://avatars.dicebear.com/4.5/api/avataaars/#{username + avatar_discriminator}.svg"
   end
 
   def unique_username

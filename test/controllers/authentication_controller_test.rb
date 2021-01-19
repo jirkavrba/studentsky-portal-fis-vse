@@ -182,4 +182,40 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to sign_up_url
     assert_equal ['Username is invalid'], flash[:alert]
   end
+
+  test 'users can reset their password' do
+    sign_out
+
+    post reset_password_url, params: {
+      username: 'admin'
+    }
+
+    assert_nil flash[:alert]
+    assert_equal 'Na email admin@vse.cz byl odeslán odkaz pro obnovení hesla.', flash[:notice]
+    assert_redirected_to sign_in_url
+  end
+
+  test 'users cannot reset their password with invalid username' do
+    sign_out
+
+    post reset_password_url, params: {
+      username: 'not_actually_a_verified_user'
+    }
+
+    assert_redirected_to reset_password_url
+    assert_equal 'Uživatel neexistuje nebo nebyl účet nebyl ještě aktivován.', flash[:alert]
+  end
+
+  test 'valid code will sign you in' do
+    sign_out
+
+    user = users(:verified_user)
+
+    get password_reset_url(code: user.password_reset_token)
+
+    assert_equal 'Dočasně přihlášen jako verified_user, nyní je možné nastavit si nové heslo.', flash[:notice]
+    assert_equal user.id, session[:user_id]
+
+    assert_nil user.reload.password_reset_token
+  end
 end

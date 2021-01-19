@@ -137,6 +137,6 @@ class AuthenticationController < ApplicationController
 
     session[:user_id] = user.id
 
-    redirect_to user_url(user), notice: "Dočasně přihlášen jako #{user.display_name}, nyní je možné obnovit si heslo."
+    redirect_to edit_user_url(user), notice: "Dočasně přihlášen jako #{user.display_name}, nyní je možné nastavit si nové heslo."
   end
 end

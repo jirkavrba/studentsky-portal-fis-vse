@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
 </head>
 
-<body>
+<body style="min-height: 100vh; display: flex; flex-flow: column nowrap;">
 <header class="ui inverted relaxed segment">
   <div class="ui container">
     <h1 class="ui inverted huge text">Studentský portál</h1>
@@ -63,7 +63,7 @@
     </div>
   </div>
 </header>
-<main class="ui wide container">
+<main class="ui wide container" style="flex-grow: 1;">
 
   <% unless flash[:alert].nil? %>
     <div class="ui error message">
@@ -97,14 +97,14 @@
   </div>
 </main>
 
-<footer class="bg-dark py-3">
-  <div class="container text-light">
-    <div class="d-flex align-items-center justify-content-between">
-      <div>
-        <b>&copy; Jiří Vrba, Richard Kraus 2021</b><br>
-        <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank">Zdrojové kódy</a>
-      </div>
+<footer class="ui secondary basic segment">
+  <div class="ui container">
+    <div class="ui secondary pointing above menu">
+      <a href="https://github.com/jirkavrba/studentsky-portal-fis-vse" target="_blank" class="item">Zdrojové
+        kódy</a>
+      <%# TODO: Add privacy policy %>
     </div>
+    <b>&copy; Jiří Vrba, Richard Kraus 2021</b>
   </div>
 </footer>
 <script>

@@ -19,7 +19,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url(size = 128)
-    "https://eu.ui-avatars.com/api/?background=random&name=#{ERB::Util.url_encode display_name}&size=#{size}"
+    "https://avatars.dicebear.com/4.5/api/avataaars/#{username.reverse}.svg"
   end
 
   def unique_username

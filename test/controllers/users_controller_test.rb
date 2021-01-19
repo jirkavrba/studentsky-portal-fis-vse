@@ -83,4 +83,23 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'New name', user.reload.name
     assert_not_equal 'New name', users(:admin_user).name
   end
+
+  test 'users can change their password in account settings' do
+    sign_in_as :verified_user
+
+    user = users(:verified_user)
+    password = SecureRandom.hex(10)
+
+    patch user_url(user), params: {
+      user: {
+        password: password
+      }
+    }
+
+    assert_redirected_to user_url(user)
+    assert_equal 'Změny byly uloženy.', flash[:notice]
+
+    # The password was changed...
+    assert user.reload.authenticate(password)
+  end
 end

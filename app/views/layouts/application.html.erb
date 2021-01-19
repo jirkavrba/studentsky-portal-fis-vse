@@ -24,8 +24,34 @@
     <div class="ui inverted secondary pointing menu">
       <%= link_to "Domovská stránka", root_url, class: 'active item' %>
       <% if authenticated? %>
-        <%= link_to discord_url, class: 'item' do %><i class="discord icon"></i> Discord
-        <% end %>
+        <div class="ui dropdown item">
+          <i class="student icon"></i>
+          Studovna
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="/test_results" class="item" id="rickroll-trigger">
+              <i class="star icon"></i> Výsledky testů a leaknuté zkouškové otázky
+            </a>
+            <div class="ui basic modal" id="rickroll">
+              <div class="content">
+                <iframe width="1080" height="720" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+            <script>
+              $(function () {
+                  $("#rickroll-trigger").click(function (event) {
+                      event.preventDefault();
+                      const video = $("#rickroll iframe").first();
+
+                      // Automatically play the video on modal trigger
+                      video.attr("src", video.data("src"));
+                      $("#rickroll").modal("show");
+                  })
+              })
+            </script>
+          </div>
+        </div>
+        <%= link_to discord_url, class: 'item' do %><i class="discord icon"></i> Discord<% end %>
       <% end %>
 
       <div class="right menu">

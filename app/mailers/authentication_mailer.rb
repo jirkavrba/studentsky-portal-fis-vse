@@ -7,6 +7,10 @@ class AuthenticationMailer < ApplicationMailer
     mail to: "#{@user.username}@vse.cz", subject: 'Aktivace účtu na studentském portálu.'
   end
 
+  def password_reset_email
+    mail to: "#{params[:username]}@vse.cz", subject: 'Obnovení hesla na studentském portálu.'
+  end
+
   private
 
   def set_user

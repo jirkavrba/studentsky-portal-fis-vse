@@ -7,6 +7,7 @@ verified_user:
   is_admin: false
   is_banned: false
   is_verified: true
+  password_reset_token: n51O8oyDRcfZyFnFoNZ9TfZyfw80AbhJqoDkf65g3-kvkcDHjyEEnb8OEZC62jTBtqIh3Yxr0sthnDaX-dbRVFWEPFbJdhbIX6xX13Ir9VntEZXt2-r433UpoAGqLk7fnQcHyqO7UTylProD-5FBEz3Dmrl-0PshO81IBH6gHuM
 
 non_verified_user:
   username: non_verified_user

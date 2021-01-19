@@ -3,7 +3,15 @@
 <%= form_with(model: @user, url: user_url(@user), method: :patch) do %>
   <div class="ui card">
     <div class="image">
-      <img src="<%= @user.avatar_url %>">
+      <img src="<%= @user.avatar_url %>" id="avatar"
+           data-template="<%= @user.avatar_url.gsub(@user.avatar_discriminator + ".svg", "DISCRIMINATOR.svg") %>">
+    </div>
+    <div class="content ui form">
+      <%= hidden_field :user, :avatar_discriminator, id: 'avatar_discriminator' %>
+      <div class="ui labeled icon button fluid" id="random-avatar-button">
+        <i class="dice icon"></i>
+        Náhodný avatar
+      </div>
     </div>
     <div class="content ui form">
       <div class="field">
@@ -15,8 +23,21 @@
       </div>
     </div>
     <div class="extra content">
-      <%= submit_tag "Uložit změny", class: 'ui button primary' %>
+      <%= submit_tag "Uložit změny", class: 'ui fluid button primary' %>
     </div>
   </div>
-
 <% end %>
+
+<script>
+  $(function () {
+    const image = $("#avatar");
+    const input = $("#avatar_discriminator");
+
+    $("#random-avatar-button").click(function () {
+      const discriminator = Math.random().toString(36).replace(".", "");
+
+      image.attr("src", image.data("template").replace("DISCRIMINATOR", discriminator));
+      input.val(discriminator);
+    });
+  });
+</script>

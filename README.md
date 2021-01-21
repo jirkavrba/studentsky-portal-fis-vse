@@ -1,24 +1,5 @@
-# README
+# Studentský portál FIS VŠE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Contributors](https://img.shields.io/github/contributors/jirkavrba/studentsky-portal-fis-vse?style=for-the-badge)
+![Last commit](https://img.shields.io/github/last-commit/jirkavrba/studentsky-portal-fis-vse?style=for-the-badge)
+![Deployment](https://img.shields.io/github/deployments/jirkavrba/studentsky-portal-fis-vse/studentsky-portal-fis-vse?style=for-the-badge)

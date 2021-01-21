@@ -23,9 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: portal
-  username: portal
-  password: portal
+  host: db
+  username: postgres
+  password: <%= ENV['PG_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

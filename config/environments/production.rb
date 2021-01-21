@@ -122,6 +122,8 @@ Rails.application.configure do
 
   config.host = 'portal.fis-vse.cz'
 
+  config.force_ssl = true
+
   config.action_mailer.default_url_options = {
     host: 'portal.fis-vse.cz',
     protocol: 'https'

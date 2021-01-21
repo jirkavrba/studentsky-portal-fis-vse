@@ -1,24 +1,23 @@
-# README
+# Studentský portál FIS VŠE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Contributors](https://img.shields.io/github/contributors/jirkavrba/studentsky-portal-fis-vse?style=for-the-badge)
+![Last commit](https://img.shields.io/github/last-commit/jirkavrba/studentsky-portal-fis-vse?style=for-the-badge)
+![Deployment](https://img.shields.io/github/deployments/jirkavrba/studentsky-portal-fis-vse/studentsky-portal-fis-vse?style=for-the-badge)
 
-Things you may want to cover:
+# Development env setup
 
-* Ruby version
+- Setup Docker
 
-* System dependencies
+- `git clone https://github.com/jirkavrba/studentsky-portal-fis-vse`
 
-* Configuration
+- `cd studentsky-portal-fis-vse`
 
-* Database creation
+- `docker build -t portal .`
 
-* Database initialization
+- `docker-compose build`
 
-* How to run the test suite
+- `docker-compose up`
 
-* Services (job queues, cache servers, search engines, etc.)
+- Run migrations 
 
-* Deployment instructions
-
-* ...
+- :tada:

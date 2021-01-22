@@ -16,4 +16,5 @@ services:
       - db
     environment:
       RAILS_ENV: development
+      USING_DOCKER: true
       PG_PASSWORD: portal

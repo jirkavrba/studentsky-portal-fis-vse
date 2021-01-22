@@ -8,7 +8,10 @@
     "@rails/webpacker": "5.2.1",
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12"
   },
   "version": "0.1.0",
   "devDependencies": {

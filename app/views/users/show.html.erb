@@ -19,7 +19,7 @@
           <small class="hash"><%= @user.username %></small>
         </div>
       </div>
-      <% if can? :manage, @user %>
+      <% if can? :ban, @user %>
         <div class="content">
           <% if @user.is_banned %>
             <%= link_to "Odblokovat účet", unban_url(@user), class: "ui secondary button", data: { confirm: "Opravdu odbanovat uživatele #{@user.display_name}?" } %>

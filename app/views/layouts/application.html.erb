@@ -29,6 +29,9 @@
           Studovna
           <i class="dropdown icon"></i>
           <div class="menu">
+            <%= link_to testers_url, class: 'item' do %>
+              <i class="check icon"></i> Testery
+            <% end %>
             <a href="/test_results" class="item" id="rickroll-trigger">
               <i class="star icon"></i> Výsledky testů a leaknuté zkouškové otázky
             </a>

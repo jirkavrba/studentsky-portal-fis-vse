@@ -1,0 +1,38 @@
+<h1>Vytvořit nový tester</h1>
+
+<%= form_with(model: @tester, url: testers_url, method: :post) do |form| %>
+  <div class="ui form">
+    <div class="ui stackable grid">
+      <div class="ui six wide column">
+        <div class="field">
+          <%= form.label :title, 'Název' %>
+          <%= form.text_field :title %>
+        </div>
+
+        <%= form.label "Předmět" %>
+        <div class="ui fluid field search selection dropdown">
+          <%= form.hidden_field :subject_id %>
+          <i class="dropdown icon"></i>
+          <div class="default text">Vyberte předmět</div>
+          <div class="menu">
+            <% @subjects.each do |subject| %>
+              <div class="item" data-value="<%= subject.id %>">
+                <div class="ui label"><%= subject.code %></div>
+                <%= subject.name %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%= form.submit "Uložit", class: 'ui button primary' %>
+      </div>
+      <div class="ui ten wide column">
+        <div class="field">
+          <%= form.label :questions, 'Otázky' %>
+        </div>
+        <div class="ui placeholder center aligned segment">
+          <h2 class="header">TODO: Vue aplikace na management otázek</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_one :email_verification
   has_one :discord_verification
 
+  has_many :testers
+
   extend Blacklist
 
   validates :username, presence: true,

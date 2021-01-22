@@ -39,6 +39,7 @@ Rails.application.routes.draw do
         format: :json
   end
 
+  resources :testers
   resources :users
 
   scope '/admin' do

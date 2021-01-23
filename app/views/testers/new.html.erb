@@ -1,4 +1,4 @@
-<h1>Vytvořit nový tester</h1>
+<h1>Přidat nový tester</h1>
 
 <%= form_with(model: @tester, url: testers_url, method: :post) do |form| %>
   <div class="ui form">
@@ -9,29 +9,63 @@
           <%= form.text_field :title %>
         </div>
 
-        <%= form.label "Předmět" %>
-        <div class="ui fluid field search selection dropdown">
-          <%= form.hidden_field :subject_id %>
-          <i class="dropdown icon"></i>
-          <div class="default text">Vyberte předmět</div>
-          <div class="menu">
-            <% @subjects.each do |subject| %>
-              <div class="item" data-value="<%= subject.id %>">
-                <div class="ui label"><%= subject.code %></div>
-                <%= subject.name %>
-              </div>
-            <% end %>
+        <div class="field">
+          <%= form.label "Předmět" %>
+          <div class="ui fluid field search selection dropdown">
+            <%= form.hidden_field :subject_id, required: true %>
+            <i class="dropdown icon"></i>
+            <div class="default text">Vyberte předmět</div>
+            <div class="menu">
+              <% @subjects.each do |subject| %>
+                <div class="item" data-value="<%= subject.id %>">
+                  <div class="relaxed content">
+                    <%= subject.name %>
+                    <%== '&nbsp;' * 3 %>
+                    <div class="ui small label">
+                      <%= subject.code %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
-        <%= form.submit "Uložit", class: 'ui button primary' %>
+
+        <div class="field">
+          <%= form.label :is_public, "Viditelnost testeru" %>
+          <div class="ui fluid field search selection dropdown">
+            <%= form.hidden_field :is_public, required: true %>
+            <i class="dropdown icon"></i>
+            <div class="default text">Vyberte viditelnost</div>
+            <div class="menu">
+              <div class="item" data-value="1" data-selected="true">
+                <div class="content">
+                  <b><i class="eye icon"></i> Veřejný tester</b><br>
+                  <small class="ui grey text">Tento tester bude viditelný pro všechny přihlášené uživatele</small>
+                </div>
+              </div>
+              <div class="item" data-value="0">
+                <div class="content">
+                  <b><i class="eye slash icon"></i> Soukromý tester</b><br>
+                  <small class="ui grey text">Tento tester bude viditelný pouze pro tvůj účet</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="ui ten wide column">
         <div class="field">
           <%= form.label :questions, 'Otázky' %>
         </div>
         <div id="questions_editor">
-          <questions-editor source='[{"text": "something", "answers": [{"text": "something", "correct": false}]}]'></questions-editor>
+          <questions-editor source='[]' name='tester[questions]'></questions-editor>
         </div>
+      </div>
+
+      <div class="ui sixteen wide column">
+        <%= form.submit "Nahrát tester", class: 'ui button primary' %>
       </div>
     </div>
   </div>

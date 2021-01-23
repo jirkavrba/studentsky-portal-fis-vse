@@ -37,6 +37,6 @@ class TestersController < ApplicationController
   end
 
   def tester_params
-    params.require(:tester).permit(:title, :subject_id)
+    params.require(:tester).permit(:title, :subject_id, :questions)
   end
 end

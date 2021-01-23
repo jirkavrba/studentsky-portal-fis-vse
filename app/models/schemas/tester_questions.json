@@ -1,55 +1,35 @@
 {
+  "$id": "https://portal.fis-vse.cz/app/models/schemas/tester_questions.json",
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://portal.fis-vse.cz/testers/questions.json",
   "type": "array",
-  "additionalItems": false,
   "items": {
-    "$id": "#/items",
-    "anyOf": [
-      {
-        "$id": "#/items/anyOf/0",
-        "type": "object",
-        "required": [
-          "text",
-          "answers"
-        ],
-        "properties": {
-          "text": {
-            "$id": "#/items/anyOf/0/properties/text",
-            "type": "string"
-          },
-          "answers": {
-            "$id": "#/items/anyOf/0/properties/answers",
-            "type": "array",
-            "additionalItems": false,
-            "items": {
-              "$id": "#/items/anyOf/0/properties/answers/items",
-              "anyOf": [
-                {
-                  "$id": "#/items/anyOf/0/properties/answers/items/anyOf/0",
-                  "type": "object",
-                  "required": [
-                    "text",
-                    "correct"
-                  ],
-                  "properties": {
-                    "text": {
-                      "$id": "#/items/anyOf/0/properties/answers/items/anyOf/0/properties/text",
-                      "type": "string"
-                    },
-                    "correct": {
-                      "$id": "#/items/anyOf/0/properties/answers/items/anyOf/0/properties/correct",
-                      "type": "boolean"
-                    }
-                  },
-                  "additionalProperties": false
-                }
-              ]
+    "type": "object",
+    "required": [
+      "text",
+      "answers"
+    ],
+    "properties": {
+      "text": {
+        "type": "string"
+      },
+      "answers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "text",
+            "correct"
+          ],
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "correct": {
+              "type": "boolean"
             }
           }
-        },
-        "additionalProperties": false
+        }
       }
-    ]
+    }
   }
 }

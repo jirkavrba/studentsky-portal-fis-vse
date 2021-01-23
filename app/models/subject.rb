@@ -3,6 +3,6 @@
 class Subject < ApplicationRecord
   has_many :testers
 
-  validates :name, :code, presence: true
+  validates_presence_of :name, :code
   validates_uniqueness_of :code, scope: :id
 end

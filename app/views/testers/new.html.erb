@@ -29,10 +29,12 @@
         <div class="field">
           <%= form.label :questions, 'Otázky' %>
         </div>
-        <div class="ui placeholder center aligned segment">
-          <h2 class="header">TODO: Vue aplikace na management otázek</h2>
+        <div id="questions_editor">
+          <questions-editor source='[{"text": "something", "answers": [{"text": "something", "correct": false}]}]'></questions-editor>
         </div>
       </div>
     </div>
   </div>
 <% end %>
+
+<%= javascript_pack_tag "testers" %>

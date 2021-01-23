@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_085502) do
     t.boolean "is_public", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.json "questions"
+    t.json "questions", default: "[]"
   end
 
   create_table "users", force: :cascade do |t|

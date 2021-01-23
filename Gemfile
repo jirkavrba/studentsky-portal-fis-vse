@@ -24,11 +24,10 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'hcaptcha'
-
-gem 'cancancan'
-
 gem 'aws-sdk-s3', require: false
+gem 'activerecord_json_validator'
+gem 'cancancan'
+gem 'hcaptcha'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

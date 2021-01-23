@@ -1,6 +1,5 @@
 {
-  "$id": "https://portal.fis-vse.cz/app/models/schemas/tester_questions.json",
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/draft-04/schema",
   "type": "array",
   "items": {
     "type": "object",

@@ -1,6 +1,18 @@
 <h1>Přidat nový tester</h1>
 
 <%= form_with(model: @tester, url: testers_url, method: :post) do |form| %>
+  <% if @tester.errors.any? %>
+    <div id="error_explanation">
+      <b><%= pluralize(@tester.errors.count, "error") %> prohibited this Discord server from being saved:</b>
+
+      <ul>
+        <% @tester.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="ui form">
     <div class="ui stackable grid">
       <div class="ui six wide column">

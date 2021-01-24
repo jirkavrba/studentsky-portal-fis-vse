@@ -1,0 +1,45 @@
+<div class="ui basic segment">
+  <div class="ui secondary segment">
+    <div class="ui content">
+      <div class="ui form">
+        <div class="field">
+          <label class="inverted">Filtrovat podle předmětu</label>
+          <%= form_with url: testers_url, method: :get do %>
+            <div class="ui clearing selection dropdown">
+              <input type="hidden" name="subject_id" id="subject_filter_<%= id = SecureRandom.hex(6) %>" value="<%= params[:subject_id] %>">
+              <i class="filter icon"></i>
+              <span class="text">Filtrovat podle předmětu</span>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="ui icon search input">
+                  <i class="search icon"></i>
+                  <input type="text" placeholder="Vyhledat...">
+                </div>
+                <div class="scrolling menu">
+                  <% subjects.each do |subject| %>
+                    <div class="item" data-value="<%= subject.id %>">
+                      <%= subject.name %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <button class="ui right attached icon button">
+              <i class="right arrow icon"></i>
+            </button>
+            <script>
+                $("#subejct_filter_<%= id %>").change(function () {
+                    console.log($(this).val());
+                })
+            </script>
+          <% end %>
+        </div>
+        <% if params[:subject_id].present? %>
+          <%= link_to testers_url, class: 'ui mini basic button' do %>
+            Zrušit filtry
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

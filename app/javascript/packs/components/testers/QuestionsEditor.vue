@@ -17,7 +17,7 @@
           </div>
           <div v-for="(answer, j) in question.answers" :key="j" class="field">
             <div class="ui action input">
-              <div :class="'ui icon button' + (answer.correct ? ' green' : '')" @click="toggleAnswer(i, j)">
+              <div :class="'ui icon button ' + (answer.correct ? 'green' : 'red')" @click="toggleAnswer(i, j)">
                 <i :class="'icon ' + (answer.correct ? 'check' : 'times')"></i>
               </div>
               <input type="text" v-model="questions[i].answers[j].text" placeholder="Text odpovědi">

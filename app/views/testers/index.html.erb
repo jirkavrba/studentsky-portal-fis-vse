@@ -1,1 +1,28 @@
 <h1>Testery</h1>
+
+<%= render partial: "testers/subjects-filter", locals: { subjects: @subjects } %>
+
+<div class="ui basic segment">
+  <%= link_to "Vytvořit nový tester", new_tester_url, class: 'ui green button' %>
+</div>
+
+<div class="ui basic segment">
+  <div class="ui cards">
+    <% @testers.each do |tester| %>
+      <div class="ui card">
+        <div class="content">
+          <b><%= tester.title || "Nepojmenovaný tester" %></b><br>
+          <div class="meta">Updated <%= distance_of_time_in_words_to_now tester.updated_at %> ago</div>
+        </div>
+        <div class="content">
+          <img class="ui mini avatar image" src="<%= tester.user.avatar_url %>">
+          <%= tester.user.display_name %>
+          <div class="ui right floated label"><%= tester.subject.code %></div>
+        </div>
+        <div class="content">
+          <%= link_to "Zobrazit tester", tester, class: 'ui fluid primary button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
